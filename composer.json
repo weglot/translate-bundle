@@ -25,5 +25,6 @@
     "psr-4": {
       "Weglot\\TranslateBundle": ""
     }
-  }
+  },
+  "target-dir": "Weglot/TranslateBundle"
 }
