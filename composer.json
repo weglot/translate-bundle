@@ -1,0 +1,29 @@
+{
+  "name": "weglot/translate-bundle",
+  "description": "TODO",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Floran Pagliai",
+      "email": "floran@weglot.com"
+    },
+    {
+      "name": "Remy Berda",
+      "email": "remy@weglot.com"
+    },
+  ],
+  "keywords": [
+    "weglot translate bundle"
+  ],
+  "license": [
+    "proprietary"
+  ],
+  "require": {
+    "mashape/unirest-php": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Weglot\\TranslateBundle": ""
+    }
+  }
+}

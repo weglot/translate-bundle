@@ -1,0 +1,6 @@
+services:
+    weglot_translate.listener.request:
+        class: Weglot\TranslateBundle\Listener\RequestListener
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ['@weglot_translate.parser']
