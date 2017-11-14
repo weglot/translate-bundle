@@ -26,6 +26,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('api_key')->isRequired()->end()
+                ->arrayNode('destination_languages')->isRequired()->requiresAtLeastOneElement()
+                    ->scalarPrototype()->end()
+                ->end()
                 ->arrayNode('exclude_blocks')
                     ->scalarPrototype()->end()
                 ->end()
