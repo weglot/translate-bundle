@@ -31,46 +31,35 @@ class RequestListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::REQUEST  => array('onKernelRequest', 100),
+            KernelEvents::REQUEST  => array('onKernelRequest', 17),
             KernelEvents::RESPONSE => array('onKernelResponse'),
         );
     }
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        // TODO : check route requested, check if weglot is needed and redirect to the right route
-//        $request = $event->getRequest();
-//        preg_match('/^\/[a-z]{2}\//', $request->getPathInfo(), $matches);
-//        if (isset($matches[0])) {
-//            $languageCode = str_replace('/', '', $matches[0]);
-//            $request->getSession()->set('_locale', $languageCode);
-//            $url = str_replace($matches[0], '/', $event->getRequest()->getRequestUri());
-//            $response = new RedirectResponse($url);
-//            $event->setResponse($response);
-//        }
         $request = $event->getRequest();
         if (!$request->hasPreviousSession()) {
             return;
         }
-
-        // try to see if the locale has been set as a _locale routing parameter
         if ($locale = $request->attributes->get('_locale')) {
             $request->setLocale($locale);
         } else {
-            // if no explicit locale has been set on this request, use one from the session
             $request->setLocale($request->getLocale());
         }
     }
 
     public function onKernelResponse(FilterResponseEvent $event)
     {
-        $request = $event->getRequest();
-        $languageFrom = $request->getDefaultLocale();
-        $languageTo = $request->getLocale();
-        if ($languageFrom != $languageTo) {
-            $content = $event->getResponse()->getContent();
-            $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
-            $event->getResponse()->setContent($translatedContent);
+        if (!$event->getRequest()->isXmlHttpRequest()) {
+            $request = $event->getRequest();
+            $languageFrom = $request->getDefaultLocale();
+            $languageTo = $request->getLocale();
+            if ($languageFrom != $languageTo) {
+                $content = $event->getResponse()->getContent();
+                $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
+                $event->getResponse()->setContent($translatedContent);
+            }
         }
     }
 }

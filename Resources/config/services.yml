@@ -4,3 +4,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
         arguments: ['@weglot_translate.parser']
+    weglot_translate.extension.language_code:
+        class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
+        tags:
+            - { name: twig.extension }
