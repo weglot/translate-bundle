@@ -12,9 +12,7 @@
       "email": "remy@weglot.com"
     }
   ],
-  "keywords": [
-    "weglot translate bundle"
-  ],
+  "keywords": ["weglot", "translate"],
   "license": [
     "proprietary"
   ],
@@ -23,8 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Weglot\\TranslateBundle": ""
+      "Weglot\\TranslateBundle\\": ""
     }
-  },
-  "target-dir": "Weglot/TranslateBundle"
+  }
 }
