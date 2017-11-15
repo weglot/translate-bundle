@@ -12,7 +12,10 @@
       "email": "remy@weglot.com"
     }
   ],
-  "keywords": ["weglot", "translate"],
+  "keywords": [
+    "weglot",
+    "translate"
+  ],
   "license": [
     "proprietary"
   ],
