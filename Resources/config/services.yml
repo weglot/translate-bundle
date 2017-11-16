@@ -18,13 +18,6 @@ services:
         tags:
             - { name: twig.extension }
 
-    twig.extension.routing:
-        class:     Weglot\TranslateBundle\Twig\RoutingExtension
-        public: false
-        tags:
-            - { name: twig.extension }
-        arguments: ['@router.default', '%kernel.default_locale%']
-
     weglot_translate.routing.loader:
       class: Weglot\TranslateBundle\Routing\Loader
       public: false

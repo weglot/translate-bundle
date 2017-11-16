@@ -40,7 +40,8 @@ class Router extends BaseRouter
      */
     public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
-        $this->preGenerate($name, $parameters);
+        $parameters = $this->preGenerate($name, $parameters);
+
         return parent::generate($name, $parameters, $referenceType);
     }
 
@@ -50,8 +51,8 @@ class Router extends BaseRouter
     public function match($pathinfo)
     {
         $parameters = parent::match($pathinfo);
-        $this->postMatch($parameters);
-        return $parameters;
+
+        return $this->postMatch($parameters);
     }
 
     /**
@@ -60,17 +61,18 @@ class Router extends BaseRouter
     public function matchRequest(Request $request)
     {
         $parameters = parent::matchRequest($request);
-        $this->postMatch($parameters);
-        return $parameters;
+
+        return $this->postMatch($parameters);
     }
 
-    private function preGenerate($name, array &$parameters = [])
+    private function preGenerate($name, array $parameters = [])
     {
-        if (null === $route = $this->getRouteCollection()->get($name)) {
-            return;
+        $route = $this->getRouteCollection()->get($name);
+        if ($route === null) {
+            return $parameters;
         }
-        if (false === $route->getOption('translate')) {
-            return;
+        if ($route->getOption('translate') === false) {
+            return $parameters;
         }
         if (isset($parameters['_locale'])) {
             $locale = $parameters['_locale'];
@@ -78,22 +80,28 @@ class Router extends BaseRouter
             $request = $this->requestStack->getCurrentRequest();
             $locale = $request === null ? $this->defaultLocale : $request->getLocale();
         }
+
         $parameters['_locale'] = $this->defaultLocale === $locale ? '' : $locale . '/';
+
+        return $parameters;
     }
 
-    private function postMatch(array &$parameters = [])
+    private function postMatch(array $parameters = [])
     {
         if (!isset($parameters['_route']) || !isset($parameters['_locale'])) {
-            return;
+            return $parameters;
         }
-        if (null === $route = $this->getRouteCollection()->get($parameters['_route'])) {
-            return;
+        $route = $this->getRouteCollection()->get($parameters['_route']);
+        if ($route === null) {
+            return $parameters;
         }
-        if (false === $route->getOption('translate')) {
-            return;
+        if ($route->getOption('translate') === false) {
+            return $parameters;
         }
         $parameters['_locale'] = isset($parameters['_locale']) && '' !== $parameters['_locale']
             ? rtrim($parameters['_locale'], '/')
             : $this->defaultLocale;
+
+        return $parameters;
     }
 }
