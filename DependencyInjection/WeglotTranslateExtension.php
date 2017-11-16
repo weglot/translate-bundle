@@ -29,18 +29,9 @@ class WeglotTranslateExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setDefinition('weglot_translate.client', new Definition(
-            Client::class, array(
-                $config['api_key']
-            )
-        ));
-
-        $container->setDefinition('weglot_translate.parser', new Definition(
-            Parser::class, array(
-                $container->findDefinition('weglot_translate.client'),
-                $config['exclude_blocks']
-            )
-        ));
+        $container->setParameter('weglot.api_key', $config['api_key']);
+        $container->setParameter('weglot.exclude_blocks', $config['exclude_blocks']);
+        $container->setParameter('weglot.locales', $config['destination_languages']);
         $container->setParameter('weglot.locales_requirement', '|' . $container->getParameter('kernel.default_locale') . '|' . implode('|', $config['destination_languages']));
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
