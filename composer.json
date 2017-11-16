@@ -14,13 +14,17 @@
   ],
   "keywords": [
     "weglot",
-    "translate"
+    "translate",
+    "translation",
+    "localization",
+    "languages"
   ],
   "license": [
     "proprietary"
   ],
   "require": {
-    "mashape/unirest-php": "3.*"
+    "mashape/unirest-php": "3.*",
+
   },
   "autoload": {
     "psr-4": {

@@ -1,10 +1,43 @@
 services:
+    weglot_translate.service.client:
+        class: Weglot\TranslateBundle\Services\Client
+        arguments: ['%weglot.api_key%']
+
+    weglot_translate.service.parser:
+        class: Weglot\TranslateBundle\Services\Parser
+        arguments: ['@weglot_translate.service.client', '%weglot.exclude_blocks%']
+
     weglot_translate.listener.request:
         class: Weglot\TranslateBundle\Listener\RequestListener
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ['@weglot_translate.parser']
+        arguments: ['@weglot_translate.service.parser']
+
     weglot_translate.extension.language_code:
         class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
         tags:
             - { name: twig.extension }
+
+    twig.extension.routing:
+        class:     Weglot\TranslateBundle\Twig\RoutingExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ['@router.default', '%kernel.default_locale%']
+
+    weglot_translate.routing.loader:
+      class: Weglot\TranslateBundle\Routing\Loader
+      public: false
+      arguments:
+        - '@weglot_translate.routing.loader.inner'
+        - '%weglot.locales%'
+        - '%kernel.default_locale%'
+      decorates: routing.loader
+
+    weglot_translate.routing.router:
+      class: Weglot\TranslateBundle\Routing\Router
+      public: false
+      parent: router.default
+      calls:
+        - [setDefaultLocale, ['%kernel.default_locale%']]
+        - [setRequestStack, ['@request_stack']]
