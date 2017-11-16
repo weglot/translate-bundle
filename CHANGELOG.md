@@ -1,5 +1,7 @@
 # CHANGELOG
 ## [Unreleased]
+
+## [Release 0.1.0]
 ### Added
 - Implement Weglot translate api with custom routing
 
