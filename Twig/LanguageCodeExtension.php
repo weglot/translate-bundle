@@ -150,6 +150,42 @@ class LanguageCodeExtension extends \Twig_Extension
                 return $getEnglish ? "Hindi" : "हिंदी";
             case "ur":
                 return $getEnglish ? "Urdu" : "اردو";
+            case "co":
+                return $getEnglish ? "Corsican" : "Corsu";
+            case "fj":
+                return $getEnglish ? "Fijian" : "Vosa Vakaviti";
+            case "haw":
+                return $getEnglish ? "Hawaiian" : "‘Ōlelo Hawai‘i";
+            case "ig":
+                return $getEnglish ? "Igbo" : "Igbo";
+            case "ny":
+                return $getEnglish ? "Chichewa" : "chiCheŵa";
+            case "ps":
+                return $getEnglish ? "Pashto" : "پښت";
+            case "sd":
+                return $getEnglish ? "Sindhi" : "سنڌي، سندھی, सिन्धी";
+            case "sn":
+                return $getEnglish ? "Shona" : "chiShona";
+            case "to":
+                return $getEnglish ? "Tongan" : "faka-Tonga";
+            case "yo":
+                return $getEnglish ? "Yoruba" : "Yorùbá";
+            case "zu":
+                return $getEnglish ? "Zulu" : "isiZulu";
+            case "ty":
+                return $getEnglish ? "Tahitian" : "te reo Tahiti, te reo Māʼohi";
+            case "sm":
+                return $getEnglish ? "Samoan" : "gagana fa'a Samoa";
+            case "ku":
+                return $getEnglish ? "Kurdish" : "كوردی";
+            case "ha":
+                return $getEnglish ? "Hausa" : "هَوُسَ";
+            case "bn":
+                return $getEnglish ? "Bengali" : "বাংলা";
+            case "st":
+                return $getEnglish ? "Southern Sotho" : "seSotho";
+            default:
+                return "Not supported language";
         }
     }
 }
