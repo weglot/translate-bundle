@@ -178,8 +178,6 @@ class LanguageFilter
                 return $getEnglish ? "Bengali" : "বাংলা";
             case "st":
                 return $getEnglish ? "Southern Sotho" : "seSotho";
-            default:
-                return "Not supported language";
         }
     }
 }
