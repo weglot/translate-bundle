@@ -178,6 +178,56 @@ class LanguageFilter
                 return $getEnglish ? "Bengali" : "বাংলা";
             case "st":
                 return $getEnglish ? "Southern Sotho" : "seSotho";
+            case "ba":
+                return $getEnglish ? "Bashkir" : "башҡорт теле";
+            case "jv":
+                return $getEnglish ? "Javanese" : "Wong Jawa";
+            case "kn":
+                return $getEnglish ? "Kannada" : "ಕನ್ನಡ";
+            case "la":
+                return $getEnglish ? "Latin" : "Latine";
+            case "lo":
+                return $getEnglish ? "Lao" : "ພາສາລາວ";
+            case "mi":
+                return $getEnglish ? "Māori" : "te reo Māori";
+            case "ml":
+                return $getEnglish ? "Malayalam" : "മലയാളം";
+            case "mr":
+                return $getEnglish ? "Marathi" : "मराठी";
+            case "ne":
+                return $getEnglish ? "Nepali" : "नेपाली";
+            case "pa":
+                return $getEnglish ? "Punjabi" : "ਪੰਜਾਬੀ";
+            case "so":
+                return $getEnglish ? "Somali" : "Soomaaliga";
+            case "su":
+                return $getEnglish ? "Sundanese" : "Sundanese";
+            case "te":
+                return $getEnglish ? "Telugu" : "తెలుగు";
+            case "yi":
+                return $getEnglish ? "Yiddish" : "ייִדיש";
+            case "am":
+                return $getEnglish ? "Amharic" : "አማርኛ";
+            case "eo":
+                return $getEnglish ? "Esperanto" : "Esperanto";
+            case "fy":
+                return $getEnglish ? "Western Frisian" : "frysk";
+            case "gd":
+                return $getEnglish ? "Scottish Gaelic" : "Gàidhlig";
+            case "gu":
+                return $getEnglish ? "Gujarati" : "ગુજરાતી";
+            case "km":
+                return $getEnglish ? "Central Khmer" : "ភាសាខ្មែរ";
+            case "lb":
+                return $getEnglish ? "Luxembourgish" : "Lëtzebuergesch";
+            case "my":
+                return $getEnglish ? "Burmese" : "မျန္မာစာ";
+            case "si":
+                return $getEnglish ? "Sinhalese" : "සිංහල";
+            case "ta":
+                return $getEnglish ? "Tamil" : "தமிழ்";
+            case "xh":
+                return $getEnglish ? "Xhosa" : "isiXhosa";
         }
     }
 }
