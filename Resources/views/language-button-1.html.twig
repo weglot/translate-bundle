@@ -1,0 +1,8 @@
+<div id="language-picker">
+    <ul class="navigation" data-wg-notranslate>
+        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: original_language }) ) }}">{{ original_language|language(false) }}</a></li>
+    {% for l in destination_languages %}
+        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: l }) ) }}">{{ l|language(false) }}</a></li>
+    {% endfor %}
+    </ul>
+</div>

@@ -33,7 +33,6 @@ class WeglotTranslateExtension extends Extension
         $container->setParameter('weglot.exclude_blocks', $config['exclude_blocks']);
         $container->setParameter('weglot.original_language', $config['original_language']);
         $container->setParameter('weglot.destination_languages', $config['destination_languages']);
-        //$container->setParameter('weglot.locales_requirement', '|' . $container->getParameter('kernel.default_locale') . '|' . implode('|', $config['destination_languages']));
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

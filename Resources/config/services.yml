@@ -13,10 +13,13 @@ services:
             - { name: kernel.event_subscriber }
         arguments: ['@weglot_translate.service.parser', '%weglot.destination_languages%']
 
-    weglot_translate.extension.language_code:
-        class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
+    weglot_translate.extension.weglot_button:
+        class: Weglot\TranslateBundle\Twig\WeglotButtonExtension
         tags:
             - { name: twig.extension }
+        calls :
+            - [setOriginalLanguage, ['%weglot.original_language%']]
+            - [setDestinationLanguages, ['%weglot.destination_languages%']]
 
     weglot_translate.routing.loader:
       class: Weglot\TranslateBundle\Routing\Loader

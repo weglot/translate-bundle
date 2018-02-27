@@ -28,10 +28,10 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('api_key')->isRequired()->end()
             ->scalarNode('original_language')->isRequired()->end()
             ->arrayNode('destination_languages')->isRequired()->requiresAtLeastOneElement()
-            ->scalarPrototype()->end()
+            ->prototype('scalar')->end()
             ->end()
             ->arrayNode('exclude_blocks')
-            ->scalarPrototype()->end()
+            ->prototype('scalar')->end()
             ->end()
             ->end();
 
