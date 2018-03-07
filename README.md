@@ -6,7 +6,7 @@ A bundle to make your Symfony website multilingual
 ### Require the dependency (with Composer)
 
 ```bash
-composer require weglot/translate-bundle dev-4-rework-for-_locale-compatibility
+composer require weglot/translate-bundle ^0.2
 ```
 
 ### Register the bundle
@@ -75,4 +75,4 @@ Finally, you can customize the button by adding your CSS code. There are already
 
 ## Help
 
-Send me a message at `remy@weglot.com`
+Send me a message at remy@weglot.com`
