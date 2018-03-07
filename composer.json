@@ -23,7 +23,7 @@
     "proprietary"
   ],
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.4",
     "ext-mbstring": "*",
     "mashape/unirest-php": "3.*"
   },
