@@ -228,6 +228,8 @@ class LanguageFilter
                 return $getEnglish ? "Tamil" : "தமிழ்";
             case "xh":
                 return $getEnglish ? "Xhosa" : "isiXhosa";
+            case "fl":
+                return $getEnglish ? "Filipino" : "Pilipino";
         }
     }
 }
