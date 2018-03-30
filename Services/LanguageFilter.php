@@ -148,7 +148,7 @@ class LanguageFilter
                 return $getEnglish ? "Corsican" : "Corsu";
             case "fj":
                 return $getEnglish ? "Fijian" : "Vosa Vakaviti";
-            case "haw":
+            case "hw":
                 return $getEnglish ? "Hawaiian" : "‘Ōlelo Hawai‘i";
             case "ig":
                 return $getEnglish ? "Igbo" : "Igbo";
