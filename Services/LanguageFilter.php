@@ -10,7 +10,6 @@ namespace Weglot\TranslateBundle\Services;
 
 class LanguageFilter
 {
-
     public static function languageFilter($locale, $getEnglish = true)
     {
         switch ($locale) {
