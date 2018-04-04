@@ -21,6 +21,11 @@ services:
             - [setOriginalLanguage, ['%weglot.original_language%']]
             - [setDestinationLanguages, ['%weglot.destination_languages%']]
 
+    weglot_translate.extension.language_code:
+        class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
+        tags:
+            - { name: twig.extension }
+
     weglot_translate.routing.loader:
       class: Weglot\TranslateBundle\Routing\Loader
       public: false
