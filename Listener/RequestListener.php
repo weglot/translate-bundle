@@ -19,6 +19,20 @@ class RequestListener implements EventSubscriberInterface
     private $parser;
     private $destinationLanguages;
 
+    private $banned_statusCodes = [
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511
+    ];
 
     /**
      * RequestListener constructor.
@@ -35,7 +49,7 @@ class RequestListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::REQUEST  => array('onKernelRequest', 17),
+            KernelEvents::REQUEST => array('onKernelRequest', 17),
             KernelEvents::RESPONSE => array('onKernelResponse'),
         );
     }
@@ -48,12 +62,17 @@ class RequestListener implements EventSubscriberInterface
     {
         if (!$event->getRequest()->isXmlHttpRequest()) {
             $request = $event->getRequest();
+            $response = $event->getResponse();
+
             $languageFrom = $request->getDefaultLocale();
             $languageTo = $request->getLocale();
-            if ($languageFrom != $languageTo && in_array($languageTo,$this->destinationLanguages)) {
-                $content = $event->getResponse()->getContent();
+
+            if (!in_array($response->getStatusCode(), $this->banned_statusCodes) &&
+                $languageFrom != $languageTo &&
+                in_array($languageTo, $this->destinationLanguages)) {
+                $content = $response->getContent();
                 $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
-                $event->getResponse()->setContent($translatedContent);
+                $response->setContent($translatedContent);
             }
         }
     }
