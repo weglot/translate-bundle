@@ -107,7 +107,7 @@ class Loader implements LoaderInterface
     private function contains($str, array $arr)
     {
         foreach($arr as $a) {
-            if (stripos($str,$a) !== false) return true;
+            if (stripos($str, $a) !== false) return true;
         }
         return false;
     }
