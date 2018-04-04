@@ -7,8 +7,6 @@
 
 namespace Weglot\TranslateBundle\Services;
 
-use voku\helper\HtmlDomParser;
-
 class Parser
 {
     private $client;
