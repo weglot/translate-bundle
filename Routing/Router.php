@@ -51,7 +51,7 @@ class Router extends BaseRouter
     public function match($pathinfo)
     {
         $parameters = parent::match($pathinfo);
-        
+
         return $parameters;
     }
 

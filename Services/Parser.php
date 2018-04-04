@@ -165,25 +165,25 @@ class Parser
 
     public function ignoreNodes($dom) {
         $nodes_to_ignore = array(
-            array('<strong>','</strong>'),
-            array('<em>','</em>'),
-            array('<abbr>','</abbr>'),
-            array('<acronym>','</acronym>'),
-            array('<b>','</b>'),
-            array('<bdo>','</bdo>'),
-            array('<big>','</big>'),
-            array('<cite>','</cite>'),
-            array('<kbd>','</kbd>'),
-            array('<q>','</q>'),
-            array('<small>','</small>'),
-            array('<sub>','</sub>'),
-            array('<sup>','</sup>'),
+            array('<strong>', '</strong>'),
+            array('<em>', '</em>'),
+            array('<abbr>', '</abbr>'),
+            array('<acronym>', '</acronym>'),
+            array('<b>', '</b>'),
+            array('<bdo>', '</bdo>'),
+            array('<big>', '</big>'),
+            array('<cite>', '</cite>'),
+            array('<kbd>', '</kbd>'),
+            array('<q>', '</q>'),
+            array('<small>', '</small>'),
+            array('<sub>', '</sub>'),
+            array('<sup>', '</sup>'),
         );
 
         foreach ($nodes_to_ignore as $ignore) {
             $pattern = '#'.$ignore[0].'([^>]*)?'.$ignore[1].'#';
             $replace = htmlentities($ignore[0]).'$1'.htmlentities($ignore[1]);
-            $dom = preg_replace($pattern,$replace,$dom);
+            $dom = preg_replace($pattern, $replace, $dom);
         }
 
         return $dom;
