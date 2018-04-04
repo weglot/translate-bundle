@@ -153,7 +153,7 @@ class Parser
             $dom = $this->ignoreNodes($dom);
         }
 
-        $html = HtmlDomParser::str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT,
+        $html = \str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT,
             DEFAULT_SPAN_TEXT);
 
         foreach ($this->excludeBlocks as $exception) {
