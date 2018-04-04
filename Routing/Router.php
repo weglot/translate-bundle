@@ -51,8 +51,8 @@ class Router extends BaseRouter
     public function match($pathinfo)
     {
         $parameters = parent::match($pathinfo);
+        
         return $parameters;
-        //return $this->postMatch($parameters);
     }
 
     /**
@@ -61,7 +61,7 @@ class Router extends BaseRouter
     public function matchRequest(Request $request)
     {
         $parameters = parent::matchRequest($request);
-        
+
         return $parameters;
     }
 
