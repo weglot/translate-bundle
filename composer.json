@@ -26,7 +26,7 @@
     "php": ">=5.4",
     "ext-mbstring": "*",
     "mashape/unirest-php": "3.*",
-    "shark/simple_html_dom": "dev-master"
+    "mgargano/simplehtmldom": "^1.5"
   },
   "autoload": {
     "psr-4": {
