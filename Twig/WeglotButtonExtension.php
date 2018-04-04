@@ -17,14 +17,14 @@ class WeglotButtonExtension extends \Twig_Extension
      *
      * @var string
      */
-    private $original_language;
+    private $originalLanguage;
 
     /**
      *  destination_languages
      *
      * @var array
      */
-    private $destination_languages = [];
+    private $destinationLanguages = [];
 
     /**
      * {@inheritdoc}
@@ -56,14 +56,14 @@ class WeglotButtonExtension extends \Twig_Extension
      */
     public function setOriginalLanguage($original)
     {
-        $this->original_language = $original;
+        $this->originalLanguage = $original;
     }
     /**
      * @param array $destinations
      */
     public function setDestinationLanguages(array $destinations)
     {
-        $this->destination_languages = $destinations;
+        $this->destinationLanguages = $destinations;
     }
 
 
@@ -76,11 +76,9 @@ class WeglotButtonExtension extends \Twig_Extension
      */
     public function renderWeglotTranslate(\Twig_Environment $twigEnvironment,  $nbtemplate)
     {
-        $original_language = $this->original_language;
-        $destination_languages = $this->destination_languages;
         return $twigEnvironment->render(
                 'WeglotTranslate@language-button-'.$nbtemplate.'.html.twig',
-            array( 'original_language' => $original_language , 'destination_languages' => $destination_languages )
+            array( 'original_language' => $this->originalLanguage , 'destination_languages' => $this->destinationLanguages )
         );
     }
 
