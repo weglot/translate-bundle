@@ -20,7 +20,18 @@ class RequestListener implements EventSubscriberInterface
     private $destinationLanguages;
 
     private $banned_statusCodes = [
-        500
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511
     ];
 
     /**
