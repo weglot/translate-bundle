@@ -7,8 +7,7 @@
 
 namespace Weglot\TranslateBundle\Services;
 
-require __DIR__ . '/../lib/simple_html_dom.php';
-
+use voku\helper\HtmlDomParser;
 
 class Parser
 {
@@ -195,7 +194,7 @@ class Parser
             $dom = $this->ignoreNodes($dom);
         }
 
-        $html = str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
+        $html = HtmlDomParser::str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
 
         foreach ($this->excludeBlocks as $exception ) {
             foreach ($html->find( $exception ) as $k => $row) {
