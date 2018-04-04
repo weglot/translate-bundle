@@ -14,7 +14,9 @@ class Client
     const BASE_URL = 'https://api.weglot.com';
     const ENDPOINT_TRANSLATE = '/translate';
 
-    /** @var string $apiKey */
+    /**
+     * @var string $apiKey
+     */
     private $apiKey;
 
     /**
@@ -26,6 +28,36 @@ class Client
         $this->apiKey = $apiKey;
     }
 
+    /**
+     * @param $languageFrom
+     * @param $languageTo
+     * @param $bot
+     * @param $pageTitle
+     * @param $requestUrl
+     * @param $words
+     * @return mixed
+     * @throws Unirest\Exception
+     */
+    public function translate($languageFrom, $languageTo, $bot, $pageTitle, $requestUrl, $words)
+    {
+        $body = array(
+            'l_from' => $languageFrom,
+            'l_to' => $languageTo,
+            'bot' => $bot,
+            'title' => $pageTitle,
+            'request_url' => $requestUrl,
+            'words' => $words
+        );
+
+        return $this->handle(self::ENDPOINT_TRANSLATE, $body);
+    }
+
+    /**
+     * @param $endpoint
+     * @param array $body
+     * @return mixed
+     * @throws Unirest\Exception
+     */
     public function handle($endpoint, $body = array())
     {
         $queryUrl = self::BASE_URL . $endpoint;
@@ -44,21 +76,11 @@ class Client
         return json_decode(json_encode($response->body), true);
     }
 
-    public function translate($languageFrom, $languageTo, $bot, $pageTitle, $requestUrl, $words)
+    /**
+     * @return string
+     */
+    public function getApiKey()
     {
-        $body = array(
-            'l_from' => $languageFrom,
-            'l_to' => $languageTo,
-            'bot' => $bot,
-            'title' => $pageTitle,
-            'request_url' => $requestUrl,
-            'words' => $words
-        );
-
-        return $this->handle(self::ENDPOINT_TRANSLATE, $body);
-    }
-
-    public function getApiKey() {
         return $this->apiKey;
     }
 }

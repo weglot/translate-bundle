@@ -25,26 +25,6 @@ class Parser
         $this->excludeBlocks = $excludeBlocks;
     }
 
-    public function hasAncestorAttribute($node, $attribute)
-    {
-
-        $currentNode = $node;
-
-        if (isset($currentNode->$attribute)) {
-            return true;
-        }
-
-        while ($currentNode->parent() && $currentNode->parent()->tag != 'html') {
-
-            if (isset($currentNode->parent()->$attribute)) {
-                return true;
-            } else {
-                $currentNode = $currentNode->parent();
-            }
-        }
-        return false;
-    }
-
     public function checkText($row)
     {
         return ($row->parent()->tag != 'script'
@@ -52,6 +32,11 @@ class Parser
             && !is_numeric($this->full_trim($row->outertext))
             && !preg_match('/^\d+%$/', $this->full_trim($row->outertext))
             && strpos($row->outertext, '[vc_') === false);
+    }
+
+    function full_trim($word)
+    {
+        return trim($word, " \t\n\r\0\x0B\xA0�");
     }
 
     public function checkButton($row)
@@ -162,42 +147,17 @@ class Parser
         return null;
     }
 
-    public function ignoreNodes($dom) {
-        $nodes_to_ignore = array(
-            array('<strong>', '</strong>'),
-            array('<em>', '</em>'),
-            array('<abbr>', '</abbr>'),
-            array('<acronym>', '</acronym>'),
-            array('<b>', '</b>'),
-            array('<bdo>', '</bdo>'),
-            array('<big>', '</big>'),
-            array('<cite>', '</cite>'),
-            array('<kbd>', '</kbd>'),
-            array('<q>', '</q>'),
-            array('<small>', '</small>'),
-            array('<sub>', '</sub>'),
-            array('<sup>', '</sup>'),
-        );
-
-        foreach ($nodes_to_ignore as $ignore) {
-            $pattern = '#'.$ignore[0].'([^>]*)?'.$ignore[1].'#';
-            $replace = htmlentities($ignore[0]).'$1'.htmlentities($ignore[1]);
-            $dom = preg_replace($pattern, $replace, $dom);
-        }
-
-        return $dom;
-    }
-
     public function translateDomFromTo($dom, $l_from, $l_to)
     {
-        if(strlen($this->client->getApiKey()) === 36) {
+        if (strlen($this->client->getApiKey()) === 36) {
             $dom = $this->ignoreNodes($dom);
         }
 
-        $html = HtmlDomParser::str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
+        $html = HtmlDomParser::str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT,
+            DEFAULT_SPAN_TEXT);
 
-        foreach ($this->excludeBlocks as $exception ) {
-            foreach ($html->find( $exception ) as $k => $row) {
+        foreach ($this->excludeBlocks as $exception) {
+            foreach ($html->find($exception) as $k => $row) {
                 $attribute = 'data-wg-notranslate';
                 $row->$attribute = '';
             }
@@ -351,7 +311,8 @@ class Parser
                     $type = $element['type'];
                     $functionName = 'check' . ucfirst($type);
 
-                    if ($this->full_trim($row->$property) != '' && !$this->hasAncestorAttribute($row, 'data-wg-notranslate')
+                    if ($this->full_trim($row->$property) != '' && !$this->hasAncestorAttribute($row,
+                            'data-wg-notranslate')
                         && $this->$functionName($row)
                     ) {
                         array_push(
@@ -402,8 +363,9 @@ class Parser
 
         $title = 'Empty title';
         foreach ($html->find('title') as $k => $row) {
-            if ($row->innertext != '')
+            if ($row->innertext != '') {
                 $title = $row->innertext;
+            }
         }
 
 
@@ -460,6 +422,101 @@ class Parser
         }
     }
 
+    public function ignoreNodes($dom)
+    {
+        $nodes_to_ignore = array(
+            array('<strong>', '</strong>'),
+            array('<em>', '</em>'),
+            array('<abbr>', '</abbr>'),
+            array('<acronym>', '</acronym>'),
+            array('<b>', '</b>'),
+            array('<bdo>', '</bdo>'),
+            array('<big>', '</big>'),
+            array('<cite>', '</cite>'),
+            array('<kbd>', '</kbd>'),
+            array('<q>', '</q>'),
+            array('<small>', '</small>'),
+            array('<sub>', '</sub>'),
+            array('<sup>', '</sup>'),
+        );
+
+        foreach ($nodes_to_ignore as $ignore) {
+            $pattern = '#' . $ignore[0] . '([^>]*)?' . $ignore[1] . '#';
+            $replace = htmlentities($ignore[0]) . '$1' . htmlentities($ignore[1]);
+            $dom = preg_replace($pattern, $replace, $dom);
+        }
+
+        return $dom;
+    }
+
+    public function hasAncestorAttribute($node, $attribute)
+    {
+
+        $currentNode = $node;
+
+        if (isset($currentNode->$attribute)) {
+            return true;
+        }
+
+        while ($currentNode->parent() && $currentNode->parent()->tag != 'html') {
+
+            if (isset($currentNode->parent()->$attribute)) {
+                return true;
+            } else {
+                $currentNode = $currentNode->parent();
+            }
+        }
+        return false;
+    }
+
+    function getValue($data, $path)
+    {
+        $temp = $data;
+        foreach ($path as $key) {
+            if (array_key_exists($key, $temp)) {
+                $temp = $temp[$key];
+            } else {
+                return null;
+            }
+        }
+        return $temp;
+    }
+
+    function addValues($value, &$words, &$nbJsonStrings)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $val) {
+                $this->addValues($val, $words, $nbJsonStrings);
+            }
+
+        } else {
+            array_push(
+                $words, array(
+                    't' => 1,
+                    'w' => $value,
+                )
+            );
+            $nbJsonStrings++;
+        }
+    }
+
+    function full_url($s, $use_forwarded_host = false)
+    {
+        return $this->url_origin($s, $use_forwarded_host) . $s['REQUEST_URI'];
+    }
+
+    function url_origin($s, $use_forwarded_host = false)
+    {
+        $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true : false;
+        $sp = strtolower($s['SERVER_PROTOCOL']);
+        $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+        $port = $s['SERVER_PORT'];
+        $port = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':' . $port;
+        $host = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
+        $host = isset($host) ? $host : $s['SERVER_NAME'] . $port;
+        return $protocol . '://' . $host;
+    }
+
     function bot_detected()
     {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
@@ -468,7 +525,8 @@ class Parser
         }
         if (isset($ua)) {
             if (preg_match('/bot|favicon|crawl|facebook|slurp|spider/i', $ua)) {
-                if (strpos($ua, 'Google') !== false || strpos($ua, 'facebook') !== false || strpos($ua, 'wprocketbot') !== false || strpos($ua, 'SemrushBot') !== false) {
+                if (strpos($ua, 'Google') !== false || strpos($ua, 'facebook') !== false || strpos($ua,
+                        'wprocketbot') !== false || strpos($ua, 'SemrushBot') !== false) {
                     return 2;
                 } elseif (strpos($ua, 'bing') !== false) {
                     return 3;
@@ -489,34 +547,16 @@ class Parser
         }
     }
 
-
-    function addValues($value, &$words, &$nbJsonStrings)
-    {
-        if (is_array($value)) {
-            foreach ($value as $key => $val) {
-                $this->addValues($val, $words, $nbJsonStrings);
-            }
-
-        } else {
-            array_push(
-                $words, array(
-                    't' => 1,
-                    'w' => $value,
-                )
-            );
-            $nbJsonStrings++;
-        }
-    }
-
     function setValues(&$data, $path, $translatedwords, &$index)
     {
 
         $temp = &$data;
         foreach ($path as $key) {
-            if (array_key_exists($key, $temp))
+            if (array_key_exists($key, $temp)) {
                 $temp = &$temp[$key];
-            else
+            } else {
                 return null;
+            }
         }
 
         if (is_array($temp)) {
@@ -529,40 +569,5 @@ class Parser
         }
 
         return;
-    }
-
-    function getValue($data, $path)
-    {
-        $temp = $data;
-        foreach ($path as $key) {
-            if (array_key_exists($key, $temp))
-                $temp = $temp[$key];
-            else
-                return null;
-        }
-        return $temp;
-    }
-
-
-    function url_origin($s, $use_forwarded_host = false)
-    {
-        $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on') ? true : false;
-        $sp = strtolower($s['SERVER_PROTOCOL']);
-        $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
-        $port = $s['SERVER_PORT'];
-        $port = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':' . $port;
-        $host = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
-        $host = isset($host) ? $host : $s['SERVER_NAME'] . $port;
-        return $protocol . '://' . $host;
-    }
-
-    function full_url($s, $use_forwarded_host = false)
-    {
-        return $this->url_origin($s, $use_forwarded_host) . $s['REQUEST_URI'];
-    }
-
-    function full_trim($word)
-    {
-        return trim($word, " \t\n\r\0\x0B\xA0�");
     }
 }
