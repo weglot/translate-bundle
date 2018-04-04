@@ -79,7 +79,7 @@ class WeglotButtonExtension extends \Twig_Extension
         $original_language = $this->original_language;
         $destination_languages = $this->destination_languages;
         return $twigEnvironment->render(
-                'WeglotTranslateBundle::language-button-'.$nbtemplate.'.html.twig',
+                'WeglotTranslate@language-button-'.$nbtemplate.'.html.twig',
             array( 'original_language' => $original_language , 'destination_languages' => $destination_languages )
         );
     }
