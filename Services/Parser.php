@@ -191,8 +191,9 @@ class Parser
 
     public function translateDomFromTo($dom, $l_from, $l_to)
     {
-        if(strlen($this->client->getApiKey())==36)
+        if(strlen($this->client->getApiKey()) === 36) {
             $dom = $this->ignoreNodes($dom);
+        }
 
         $html = str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
 
