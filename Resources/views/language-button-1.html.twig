@@ -1,8 +1,8 @@
 <div id="weglot-language-picker">
     <ul class="weglot-navigation" data-wg-notranslate>
-        <li class="weglot-{{ original_language }}"><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: original_language }) ) }}" class="weglot-{{ original_language }}">{{ original_language|language(false) }}</a></li>
+        <li class="weglot-{{ original_language }}"><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: original_language }) ) }}" class="weglot-{{ original_language }}">{{ original_language | language(false) }}</a></li>
         {% for l in destination_languages %}
-            <li class="weglot-{{ l }}"><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: l }) ) }}" class="weglot-{{ l }}">{{ l|language(false) }}</a></li>
+            <li class="weglot-{{ l }}"><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: l }) ) }}" class="weglot-{{ l }}">{{ l | language(false) }}</a></li>
         {% endfor %}
     </ul>
 </div>

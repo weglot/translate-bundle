@@ -1,4 +1,4 @@
-    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: original_language }) ) }}" data-wg-notranslate class="weglot-link weglot-{{ original_language }}">{{ original_language|language(false) }}</a>
+    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: original_language }) ) }}" data-wg-notranslate class="weglot-link weglot-{{ original_language }}">{{ original_language | language(false) }}</a>
 {% for l in destination_languages %}
-    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: l }) ) }}" data-wg-notranslate class="weglot-link weglot-{{ l }}">{{ l|language(false) }}</a>
+    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params') | merge({_locale: l }) ) }}" data-wg-notranslate class="weglot-link weglot-{{ l }}">{{ l | language(false) }}</a>
 {% endfor %}
