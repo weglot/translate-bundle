@@ -57,4 +57,8 @@ class Client
 
         return $this->handle(self::ENDPOINT_TRANSLATE, $body);
     }
+
+    public function getApiKey() {
+        return $this->apiKey;
+    }
 }

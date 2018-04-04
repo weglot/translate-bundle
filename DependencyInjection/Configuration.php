@@ -25,13 +25,14 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('api_key')->isRequired()->end()
-                ->arrayNode('destination_languages')->isRequired()->requiresAtLeastOneElement()
-                    ->scalarPrototype()->end()
-                ->end()
-                ->arrayNode('exclude_blocks')
-                    ->scalarPrototype()->end()
-                ->end()
+            ->scalarNode('api_key')->isRequired()->end()
+            ->scalarNode('original_language')->isRequired()->end()
+            ->arrayNode('destination_languages')->isRequired()->requiresAtLeastOneElement()
+            ->prototype('scalar')->end()
+            ->end()
+            ->arrayNode('exclude_blocks')
+            ->prototype('scalar')->end()
+            ->end()
             ->end();
 
         return $treeBuilder;

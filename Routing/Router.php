@@ -52,7 +52,7 @@ class Router extends BaseRouter
     {
         $parameters = parent::match($pathinfo);
 
-        return $this->postMatch($parameters);
+        return $parameters;
     }
 
     /**
@@ -62,8 +62,9 @@ class Router extends BaseRouter
     {
         $parameters = parent::matchRequest($request);
 
-        return $this->postMatch($parameters);
+        return $parameters;
     }
+
 
     private function preGenerate($name, array $parameters = [])
     {
@@ -81,11 +82,18 @@ class Router extends BaseRouter
             $locale = $request === null ? $this->defaultLocale : $request->getLocale();
         }
 
-        $parameters['_locale'] = $this->defaultLocale === $locale ? '' : $locale . '/';
+
+
+        if ($route->hasDefault('_S')) {
+            $parameters['_S']       = $this->defaultLocale === $locale ? '' : '/';
+            $parameters['_locale']  = $this->defaultLocale === $locale ? '' : $locale;
+        }
+
 
         return $parameters;
     }
 
+    /* We don't need this anymore as we changed _locale from zh/ to zh so no need to add or remove a slash */
     private function postMatch(array $parameters = [])
     {
         if (!isset($parameters['_route']) || !isset($parameters['_locale'])) {

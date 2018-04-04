@@ -163,8 +163,38 @@ class Parser
         return null;
     }
 
+    public function ignoreNodes($dom) {
+        $nodes_to_ignore = array(
+            array('<strong>', '</strong>'),
+            array('<em>', '</em>'),
+            array('<abbr>', '</abbr>'),
+            array('<acronym>', '</acronym>'),
+            array('<b>', '</b>'),
+            array('<bdo>', '</bdo>'),
+            array('<big>', '</big>'),
+            array('<cite>', '</cite>'),
+            array('<kbd>', '</kbd>'),
+            array('<q>', '</q>'),
+            array('<small>', '</small>'),
+            array('<sub>', '</sub>'),
+            array('<sup>', '</sup>'),
+        );
+
+        foreach ($nodes_to_ignore as $ignore) {
+            $pattern = '#'.$ignore[0].'([^>]*)?'.$ignore[1].'#';
+            $replace = htmlentities($ignore[0]).'$1'.htmlentities($ignore[1]);
+            $dom = preg_replace($pattern, $replace, $dom);
+        }
+
+        return $dom;
+    }
+
     public function translateDomFromTo($dom, $l_from, $l_to)
     {
+        if(strlen($this->client->getApiKey()) === 36) {
+            $dom = $this->ignoreNodes($dom);
+        }
+
         $html = str_get_html($dom, true, true, DEFAULT_TARGET_CHARSET, false, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
 
         foreach ($this->excludeBlocks as $exception ) {

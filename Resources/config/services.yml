@@ -11,7 +11,13 @@ services:
         class: Weglot\TranslateBundle\Listener\RequestListener
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ['@weglot_translate.service.parser']
+        arguments: ['@weglot_translate.service.parser', '%weglot.destination_languages%']
+
+    weglot_translate.extension.weglot_button:
+        class: Weglot\TranslateBundle\Twig\WeglotButtonExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['%weglot.original_language%', '%weglot.destination_languages%']
 
     weglot_translate.extension.language_code:
         class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
@@ -23,8 +29,8 @@ services:
       public: false
       arguments:
         - '@weglot_translate.routing.loader.inner'
-        - '%weglot.locales%'
-        - '%kernel.default_locale%'
+        - '%weglot.destination_languages%'
+        - '%weglot.original_language%'
       decorates: routing.loader
 
     weglot_translate.routing.router:
@@ -32,5 +38,5 @@ services:
       public: false
       parent: router.default
       calls:
-        - [setDefaultLocale, ['%kernel.default_locale%']]
+        - [setDefaultLocale, ['%weglot.original_language%']]
         - [setRequestStack, ['@request_stack']]
