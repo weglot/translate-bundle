@@ -17,18 +17,18 @@ use Weglot\TranslateBundle\Services\Parser;
 class RequestListener implements EventSubscriberInterface
 {
     private $parser;
-    private $destination_languages;
+    private $destinationLanguages;
 
 
     /**
      * RequestListener constructor.
      * @param Parser $parser
-     * @var $destination_languages
+     * @var $destinationLanguages
      */
-    public function __construct(Parser $parser, $destination_languages)
+    public function __construct(Parser $parser, $destinationLanguages)
     {
         $this->parser = $parser;
-        $this->destination_languages = $destination_languages;
+        $this->destinationLanguages = $destinationLanguages;
     }
 
 
@@ -42,15 +42,6 @@ class RequestListener implements EventSubscriberInterface
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        /* $request = $event->getRequest();
-         if (!$request->hasPreviousSession()) {
-             return;
-         }
-         if ($locale = $request->attributes->get('_locale')) {
-             $request->setLocale($locale);
-         } else {
-             $request->setLocale($request->getLocale());
-         }*/
     }
 
     public function onKernelResponse(FilterResponseEvent $event)
@@ -59,7 +50,7 @@ class RequestListener implements EventSubscriberInterface
             $request = $event->getRequest();
             $languageFrom = $request->getDefaultLocale();
             $languageTo = $request->getLocale();
-            if ($languageFrom != $languageTo && in_array($languageTo,$this->destination_languages)) {
+            if ($languageFrom != $languageTo && in_array($languageTo,$this->destinationLanguages)) {
                 $content = $event->getResponse()->getContent();
                 $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
                 $event->getResponse()->setContent($translatedContent);
