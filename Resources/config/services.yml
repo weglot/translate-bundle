@@ -17,9 +17,7 @@ services:
         class: Weglot\TranslateBundle\Twig\WeglotButtonExtension
         tags:
             - { name: twig.extension }
-        calls :
-            - [setOriginalLanguage, ['%weglot.original_language%']]
-            - [setDestinationLanguages, ['%weglot.destination_languages%']]
+        arguments: ['%weglot.original_language%', '%weglot.destination_languages%']
 
     weglot_translate.extension.language_code:
         class: Weglot\TranslateBundle\Twig\LanguageCodeExtension

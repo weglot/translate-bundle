@@ -27,6 +27,17 @@ class WeglotButtonExtension extends \Twig_Extension
     private $destinationLanguages = [];
 
     /**
+     * WeglotButtonExtension constructor.
+     * @param $originalLanguage
+     * @param $destinationLanguages
+     */
+    public function __construct($originalLanguage, array $destinationLanguages)
+    {
+        $this->originalLanguage = $originalLanguage;
+        $this->destinationLanguages = $destinationLanguages;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getFunctions()
@@ -50,22 +61,6 @@ class WeglotButtonExtension extends \Twig_Extension
     {
         return 'weglot_translate';
     }
-
-    /**
-     * @param array $original
-     */
-    public function setOriginalLanguage($original)
-    {
-        $this->originalLanguage = $original;
-    }
-    /**
-     * @param array $destinations
-     */
-    public function setDestinationLanguages(array $destinations)
-    {
-        $this->destinationLanguages = $destinations;
-    }
-
 
     /**
      * Render weglot button.
