@@ -25,7 +25,8 @@
   "require": {
     "php": ">=5.4",
     "ext-mbstring": "*",
-    "mashape/unirest-php": "3.*"
+    "mashape/unirest-php": "3.*",
+    "voku/simple_html_dom": "^4.1"
   },
   "autoload": {
     "psr-4": {
