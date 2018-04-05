@@ -7,16 +7,15 @@
 
 namespace Weglot\TranslateBundle\Twig;
 
-
 use Weglot\TranslateBundle\Services\LanguageFilter;
 
 class LanguageCodeExtension extends \Twig_Extension
 {
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('language', array($this, 'languageFilter')),
-        );
+        return [
+            new \Twig_SimpleFilter('language', [$this, 'languageFilter']),
+        ];
     }
 
     public function languageFilter($locale, $getEnglish = true)

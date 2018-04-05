@@ -6,3 +6,5 @@ vendor/
 html/
 .DS_Store
 .idea
+.php_cs.cache
+composer.phar
