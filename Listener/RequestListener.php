@@ -19,21 +19,6 @@ class RequestListener implements EventSubscriberInterface
     private $parser;
     private $destinationLanguages;
 
-    private $banned_statusCodes = [
-        500,
-        501,
-        502,
-        503,
-        504,
-        505,
-        506,
-        507,
-        508,
-        509,
-        510,
-        511
-    ];
-
     /**
      * RequestListener constructor.
      * @param Parser $parser
@@ -67,9 +52,7 @@ class RequestListener implements EventSubscriberInterface
             $languageFrom = $request->getDefaultLocale();
             $languageTo = $request->getLocale();
 
-            if (!in_array($response->getStatusCode(), $this->banned_statusCodes) &&
-                $languageFrom != $languageTo &&
-                in_array($languageTo, $this->destinationLanguages)) {
+            if ($languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages)) {
                 $content = $response->getContent();
                 $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
                 $response->setContent($translatedContent);
