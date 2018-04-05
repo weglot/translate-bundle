@@ -7,7 +7,6 @@
 
 namespace Weglot\TranslateBundle\Twig;
 
-
 use Weglot\TranslateBundle\Services\LanguageFilter;
 
 class WeglotButtonExtension extends \Twig_Extension
@@ -42,16 +41,16 @@ class WeglotButtonExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
                 'weglot_translate_render',
-                array(
+                [
                     $this,
                     'renderWeglotTranslate',
-                ),
-                array('needs_environment' => true, 'is_safe' => ['html'])
+                ],
+                ['needs_environment' => true, 'is_safe' => ['html']]
             ),
-        );
+        ];
     }
 
     /**
@@ -73,19 +72,19 @@ class WeglotButtonExtension extends \Twig_Extension
     {
         return $twigEnvironment->render(
             '@WeglotTranslate/language-button-' . $nbtemplate . '.html.twig',
-            array(
+            [
                 'original_language' => $this->originalLanguage,
                 'destination_languages' => $this->destinationLanguages
-            )
+            ]
         );
     }
 
 
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('language', array($this, 'languageFilter')),
-        );
+        return [
+            new \Twig_SimpleFilter('language', [$this, 'languageFilter']),
+        ];
     }
 
     public function languageFilter($locale, $getEnglish = true)

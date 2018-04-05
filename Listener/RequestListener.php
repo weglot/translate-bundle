@@ -19,6 +19,10 @@ class RequestListener implements EventSubscriberInterface
     private $parser;
     private $destinationLanguages;
 
+    private $bannedRoutes = [
+        '/_profiler/open',
+        '/_profiler/{token}'
+    ];
 
     /**
      * RequestListener constructor.
@@ -34,10 +38,10 @@ class RequestListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::REQUEST  => array('onKernelRequest', 17),
-            KernelEvents::RESPONSE => array('onKernelResponse'),
-        );
+        return [
+            KernelEvents::REQUEST => ['onKernelRequest', 17],
+            KernelEvents::RESPONSE => ['onKernelResponse'],
+        ];
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -48,12 +52,19 @@ class RequestListener implements EventSubscriberInterface
     {
         if (!$event->getRequest()->isXmlHttpRequest()) {
             $request = $event->getRequest();
+            $response = $event->getResponse();
+
             $languageFrom = $request->getDefaultLocale();
             $languageTo = $request->getLocale();
-            if ($languageFrom != $languageTo && in_array($languageTo,$this->destinationLanguages)) {
-                $content = $event->getResponse()->getContent();
+
+            $router_path_check = ($request->request->has('_weglot_router_path') &&
+                !in_array($request->request->get('_weglot_router_path'), $this->bannedRoutes));
+
+            if ($router_path_check &&
+                $languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages)) {
+                $content = $response->getContent();
                 $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
-                $event->getResponse()->setContent($translatedContent);
+                $response->setContent($translatedContent);
             }
         }
     }

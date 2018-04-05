@@ -47,7 +47,7 @@ class Loader implements LoaderInterface
             return $routes;
         }
 
-        $excludedUrl = array('_wdt', '_profiler'); //to move as a parameter
+        $excludedUrl = ['_wdt', '_profiler']; //@TODO: to move as a parameter
 
         foreach ($routes as $name => $route) {
             if ($route instanceof Route) {
@@ -59,24 +59,37 @@ class Loader implements LoaderInterface
                             ->addDefaults(['_locale' => $this->defaultLocale, '_S' => '/'])
                             ->addRequirements([
                                 '_locale' => '|' . implode('|', array_map(function ($locale) {
-                                        return $locale === $this->defaultLocale ? '' : $locale;
-                                    }, $this->locales)),
+                                    return $locale === $this->defaultLocale ? '' : $locale;
+                                }, $this->locales)),
                                 '_S' => '/?'
                             ]);
                     } else { //If locale is already in the URL; we still need to add the new languages to the requirements
                         $alreadyConfiguredLanguages = explode('|', $route->getRequirement('_locale'));
-                        $allLanguages = array_unique(array_merge($alreadyConfiguredLanguages, $this->locales), SORT_REGULAR);
+                        $allLanguages = array_unique(
+                            array_merge($alreadyConfiguredLanguages, $this->locales),
+                            SORT_REGULAR
+                        );
                         $route
                             ->addRequirements([
                                 '_locale' => '|' . implode('|', array_map(function ($locale) {
-                                        return $locale === $this->defaultLocale ? '' : $locale;
-                                    }, $allLanguages))
+                                    return $locale === $this->defaultLocale ? '' : $locale;
+                                }, $allLanguages))
                             ]);
                     }
                 }
             }
         }
         return $routes;
+    }
+
+    private function contains($str, array $arr)
+    {
+        foreach ($arr as $a) {
+            if (stripos($str, $a) !== false) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -101,13 +114,5 @@ class Loader implements LoaderInterface
     public function setResolver(LoaderResolverInterface $resolver)
     {
         return $this->loader->setResolver($resolver);
-    }
-
-    private function contains($str, array $arr)
-    {
-        foreach ($arr as $a) {
-            if (stripos($str, $a) !== false) return true;
-        }
-        return false;
     }
 }
