@@ -40,14 +40,14 @@ class Client
      */
     public function translate($languageFrom, $languageTo, $bot, $pageTitle, $requestUrl, $words)
     {
-        $body = array(
+        $body = [
             'l_from' => $languageFrom,
             'l_to' => $languageTo,
             'bot' => $bot,
             'title' => $pageTitle,
             'request_url' => $requestUrl,
             'words' => $words
-        );
+        ];
 
         return $this->handle(self::ENDPOINT_TRANSLATE, $body);
     }
@@ -58,15 +58,15 @@ class Client
      * @return mixed
      * @throws Unirest\Exception
      */
-    public function handle($endpoint, $body = array())
+    public function handle($endpoint, $body = [])
     {
         $queryUrl = self::BASE_URL . $endpoint;
         $queryUrl .= '?api_key=' . $this->apiKey;
 
         $body = Unirest\Request\Body::Json($body);
-        $headers = array(
+        $headers = [
             'Content-Type' => 'application/json',
-        );
+        ];
         $response = Unirest\Request::post($queryUrl, $headers, $body);
 
         if (($response->code < 200) || ($response->code > 206)) {
