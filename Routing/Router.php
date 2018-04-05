@@ -48,6 +48,11 @@ class Router extends BaseRouter
     private function preGenerate($name, array $parameters = [])
     {
         $route = $this->getRouteCollection()->get($name);
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request !== null) {
+            $request->request->add(['_weglot_router_path' => $route->getPath()]);
+        }
+
         if ($route === null) {
             return $parameters;
         }

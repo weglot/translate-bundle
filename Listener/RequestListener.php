@@ -19,6 +19,11 @@ class RequestListener implements EventSubscriberInterface
     private $parser;
     private $destinationLanguages;
 
+    private $banned_routes = [
+        '/_profiler/open',
+        '/_profiler/{token}'
+    ];
+
     /**
      * RequestListener constructor.
      * @param Parser $parser
@@ -52,7 +57,11 @@ class RequestListener implements EventSubscriberInterface
             $languageFrom = $request->getDefaultLocale();
             $languageTo = $request->getLocale();
 
-            if ($languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages)) {
+            $router_path_check = ($request->request->has('_weglot_router_path') &&
+                !in_array($request->request->get('_weglot_router_path'), $this->banned_paths));
+
+            if ($router_path_check &&
+                $languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages)) {
                 $content = $response->getContent();
                 $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
                 $response->setContent($translatedContent);
