@@ -6,7 +6,7 @@ A bundle to make your Symfony website multilingual
 ### Require the dependency (with Composer)
 
 ```bash
-composer require weglot/translate-bundle ^0.2
+composer require weglot/translate-bundle ^0.3
 ```
 
 ### Register the bundle
