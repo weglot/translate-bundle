@@ -163,7 +163,7 @@ class Parser
 
         foreach ($this->excludeBlocks as $exception) {
             foreach ($html->find($exception) as $k => $row) {
-                $attribute = 'wg-notranslate';
+                $attribute = 'data-wg-notranslate';
                 $row->$attribute = '';
             }
         }
@@ -316,7 +316,7 @@ class Parser
 
                     if ($this->full_trim($row->$property) != '' && !$this->hasAncestorAttribute(
                         $row,
-                            'wg-notranslate'
+                            'data-wg-notranslate'
                     )
                         && $this->$functionName($row)
                     ) {
