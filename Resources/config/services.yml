@@ -30,6 +30,7 @@ services:
         class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
         tags:
             - { name: twig.extension }
+        arguments: ['@weglot_translate.service.languages_endpoint']
 
     weglot_translate.routing.loader:
       class: Weglot\TranslateBundle\Routing\Loader
