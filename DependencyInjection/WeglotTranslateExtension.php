@@ -12,8 +12,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Weglot\TranslateBundle\Services\Client;
-use Weglot\TranslateBundle\Services\Parser;
 
 class WeglotTranslateExtension extends Extension
 {
