@@ -1,19 +1,22 @@
 {
   "name": "weglot/translate-bundle",
-  "description": "TODO",
+  "description": "Seamless integration of Weglot into your Symfony project",
   "type": "symfony-bundle",
   "authors": [
     {
       "name": "Floran Pagliai",
-      "email": "floran@weglot.com"
+      "email": "floran@weglot.com",
+      "role": "Developer"
     },
     {
       "name": "Remy Berda",
-      "email": "remy@weglot.com"
+      "email": "remy@weglot.com",
+      "role": "Developer"
     },
     {
       "name": "Baptiste Leduc",
-      "email": "baptiste@weglot.com"
+      "email": "baptiste@weglot.com",
+      "role": "Developer"
     }
   ],
   "keywords": [
@@ -23,14 +26,11 @@
     "localization",
     "languages"
   ],
-  "license": [
-    "proprietary"
-  ],
+  "license": "MIT",
   "require": {
-    "php": ">=5.4",
+    "php": ">=5.5",
     "ext-mbstring": "*",
-    "mashape/unirest-php": "3.*",
-    "weglot/simplehtmldom": "^0.1.0"
+    "weglot/weglot-php": "^0.1.0"
   },
   "autoload": {
     "psr-4": {

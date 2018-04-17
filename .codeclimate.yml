@@ -1,0 +1,15 @@
+version: "2"
+checks:
+  method-complexity:
+    config:
+      threshold: 10
+plugins:
+  phpcodesniffer:
+    enabled: true
+    config:
+      standard: "PSR1,PSR2"
+  phpmd:
+    enabled: true
+    config:
+      file_extensions: "php"
+      relesets: "unusedcode,controversial,naming,codesize"

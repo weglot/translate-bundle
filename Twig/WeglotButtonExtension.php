@@ -1,39 +1,43 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 07/07/2017
- * Time: 14:14
- */
 
 namespace Weglot\TranslateBundle\Twig;
 
-use Weglot\TranslateBundle\Services\LanguageFilter;
+use Weglot\Client\Api\LanguageCollection;
+use Weglot\Client\Endpoint\Languages;
 
+/**
+ * Class WeglotButtonExtension
+ * @package Weglot\TranslateBundle\Twig
+ */
 class WeglotButtonExtension extends \Twig_Extension
 {
     /**
-     * Original language
-     *
      * @var string
      */
-    private $originalLanguage;
+    protected $originalLanguage;
 
     /**
-     *  destination_languages
-     *
      * @var array
      */
-    private $destinationLanguages = [];
+    protected $destinationLanguages = [];
+
+    /**
+     * @var LanguageCollection
+     */
+    protected $languageCollection;
 
     /**
      * WeglotButtonExtension constructor.
-     * @param $originalLanguage
-     * @param $destinationLanguages
+     * @param string $originalLanguage
+     * @param array $destinationLanguages
+     * @param Languages $languages
      */
-    public function __construct($originalLanguage, array $destinationLanguages)
+    public function __construct($originalLanguage, array $destinationLanguages, Languages $languages)
     {
         $this->originalLanguage = $originalLanguage;
         $this->destinationLanguages = $destinationLanguages;
+
+        $this->languageCollection = $languages->handle();
     }
 
     /**
@@ -89,6 +93,11 @@ class WeglotButtonExtension extends \Twig_Extension
 
     public function languageFilter($locale, $getEnglish = true)
     {
-        return LanguageFilter::languageFilter($locale, $getEnglish);
+        $language = $this->languageCollection->getCode($locale);
+
+        if ($getEnglish) {
+            return $language->getEnglishName();
+        }
+        return $language->getLocalName();
     }
 }
