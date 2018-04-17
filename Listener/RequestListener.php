@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 13/11/2017
- * Time: 10:48
- */
 
 namespace Weglot\TranslateBundle\Listener;
 
@@ -14,6 +9,10 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Weglot\Parser\Parser;
 
+/**
+ * Class RequestListener
+ * @package Weglot\TranslateBundle\Listener
+ */
 class RequestListener implements EventSubscriberInterface
 {
     /**

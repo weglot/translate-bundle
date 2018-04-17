@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 16/11/2017
- * Time: 10:58
- */
 
 namespace Weglot\TranslateBundle\Routing;
 
@@ -12,6 +7,10 @@ use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
+/**
+ * Class Loader
+ * @package Weglot\TranslateBundle\Routing
+ */
 class Loader implements LoaderInterface
 {
     /**

@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 16/11/2017
- * Time: 11:03
- */
 
 namespace Weglot\TranslateBundle\Routing;
 
@@ -11,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router as BaseRouter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * Class Router
+ * @package Weglot\TranslateBundle\Routing
+ */
 class Router extends BaseRouter
 {
     /**
