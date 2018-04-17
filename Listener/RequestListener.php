@@ -12,14 +12,21 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Weglot\TranslateBundle\Services\Parser;
+use Weglot\Parser\Parser;
 
 class RequestListener implements EventSubscriberInterface
 {
-    private $parser;
-    private $destinationLanguages;
+    /**
+     * @var Parser
+     */
+    protected $parser;
 
-    private $bannedRoutes = [
+    /**
+     * @var array
+     */
+    protected $destinationLanguages;
+
+    protected $bannedRoutes = [
         '/_profiler/open',
         '/_profiler/{token}'
     ];
@@ -29,7 +36,7 @@ class RequestListener implements EventSubscriberInterface
      * @param Parser $parser
      * @var $destinationLanguages
      */
-    public function __construct(Parser $parser, $destinationLanguages)
+    public function __construct(Parser $parser, array $destinationLanguages)
     {
         $this->parser = $parser;
         $this->destinationLanguages = $destinationLanguages;
@@ -63,7 +70,7 @@ class RequestListener implements EventSubscriberInterface
             if ($router_path_check &&
                 $languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages)) {
                 $content = $response->getContent();
-                $translatedContent = $this->parser->translateDomFromTo($content, $languageFrom, $languageTo);
+                $translatedContent = $this->parser->translate($content, $languageFrom, $languageTo);
                 $response->setContent($translatedContent);
             }
         }
