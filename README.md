@@ -84,11 +84,11 @@ You can add a language button if you're using Twig with function: `weglot_transl
 
 Two layouts exists:
 ```twig
-<!-- first layout (horizontal) -->
-{{ weglot_translate_render(1) }}
+<!-- first layout -->
+{{ weglot_translate_render(\Weglot\TranslateBundle\Twig\WeglotTemplate::HORIZONTAL) }}
 
-<!-- first layout (vertical) -->
-{{ weglot_translate_render(2) }}
+<!-- second layout -->
+{{ weglot_translate_render(\Weglot\TranslateBundle\Twig\WeglotTemplate::VERTICAL) }}
 ```
 
 
