@@ -19,14 +19,14 @@ class RequestListener implements EventSubscriberInterface
     /**
      * @var Parser
      */
-    private $parser;
+    protected $parser;
 
     /**
      * @var array
      */
-    private $destinationLanguages;
+    protected $destinationLanguages;
 
-    private $bannedRoutes = [
+    protected $bannedRoutes = [
         '/_profiler/open',
         '/_profiler/{token}'
     ];
