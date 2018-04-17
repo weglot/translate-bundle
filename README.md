@@ -57,7 +57,7 @@ $bundles = array(
 ### Configuration
 
 For Symfony 4, create configuration file under `config/packages/weglot_translate.yml` and add following content.
-For Symfony 3 & 2, add following content to your `config.yml`.
+For Symfony 3 & 2, add following content to your `app/config/config.yml`.
 ```yaml
 weglot_translate:
     api_key: 'YOUR_WEGLOT_API_KEY'
