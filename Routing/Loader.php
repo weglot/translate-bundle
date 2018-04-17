@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 16/11/2017
- * Time: 10:58
- */
 
 namespace Weglot\TranslateBundle\Routing;
 
@@ -12,6 +7,10 @@ use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
+/**
+ * Class Loader
+ * @package Weglot\TranslateBundle\Routing
+ */
 class Loader implements LoaderInterface
 {
     /**
@@ -54,27 +53,10 @@ class Loader implements LoaderInterface
                 if ($route->getOption('translate') !== false && !$this->contains($route->getPath(), $excludedUrl)) {
                     // If we already have _locale in the URL we don't add it in the URL
                     if (strpos($route->getPath(), '{_locale}') === false) {
-                        $route
-                            ->setPath('/{_locale}{_S}' . ltrim($route->getPath(), '/'))
-                            ->addDefaults(['_locale' => $this->defaultLocale, '_S' => '/'])
-                            ->addRequirements([
-                                '_locale' => '|' . implode('|', array_map(function ($locale) {
-                                    return $locale === $this->defaultLocale ? '' : $locale;
-                                }, $this->locales)),
-                                '_S' => '/?'
-                            ]);
-                    } else { //If locale is already in the URL; we still need to add the new languages to the requirements
-                        $alreadyConfiguredLanguages = explode('|', $route->getRequirement('_locale'));
-                        $allLanguages = array_unique(
-                            array_merge($alreadyConfiguredLanguages, $this->locales),
-                            SORT_REGULAR
-                        );
-                        $route
-                            ->addRequirements([
-                                '_locale' => '|' . implode('|', array_map(function ($locale) {
-                                    return $locale === $this->defaultLocale ? '' : $locale;
-                                }, $allLanguages))
-                            ]);
+                        $this->addLocaleToUrl($route);
+                    } else {
+                        // If locale is already in the URL; we still need to add the new languages to the requirements
+                        $this->addLanguagesToRequirements($route);
                     }
                 }
             }
@@ -82,7 +64,40 @@ class Loader implements LoaderInterface
         return $routes;
     }
 
-    private function contains($str, array $arr)
+    /**
+     * @param Route $route
+     */
+    protected function addLocaleToUrl(Route $route)
+    {
+        $route
+            ->setPath('/{_locale}{_S}' . ltrim($route->getPath(), '/'))
+            ->addDefaults(['_locale' => $this->defaultLocale, '_S' => '/'])
+            ->addRequirements([
+                '_locale' => '|' . implode('|', array_map(function ($locale) {
+                    return $locale === $this->defaultLocale ? '' : $locale;
+                }, $this->locales)),
+                '_S' => '/?'
+            ]);
+    }
+
+    /**
+     * @param Route $route
+     */
+    protected function addLanguagesToRequirements(Route $route)
+    {
+        $alreadyConfiguredLanguages = explode('|', $route->getRequirement('_locale'));
+        $allLanguages = array_unique(
+            array_merge($alreadyConfiguredLanguages, $this->locales),
+            SORT_REGULAR
+        );
+        $route->addRequirements([
+            '_locale' => '|' . implode('|', array_map(function ($locale) {
+                return $locale === $this->defaultLocale ? '' : $locale;
+            }, $allLanguages))
+        ]);
+    }
+
+    protected function contains($str, array $arr)
     {
         foreach ($arr as $a) {
             if (stripos($str, $a) !== false) {

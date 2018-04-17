@@ -1,15 +1,14 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 07/07/2017
- * Time: 14:14
- */
 
 namespace Weglot\TranslateBundle\Twig;
 
 use Weglot\Client\Api\LanguageCollection;
 use Weglot\Client\Endpoint\Languages;
 
+/**
+ * Class WeglotButtonExtension
+ * @package Weglot\TranslateBundle\Twig
+ */
 class WeglotButtonExtension extends \Twig_Extension
 {
     /**

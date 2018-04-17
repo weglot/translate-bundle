@@ -1,15 +1,14 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 13/11/2017
- * Time: 14:27
- */
 
 namespace Weglot\TranslateBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Class Configuration
+ * @package Weglot\TranslateBundle\DependencyInjection
+ */
 class Configuration implements ConfigurationInterface
 {
 

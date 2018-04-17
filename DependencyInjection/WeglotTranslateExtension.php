@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Floran Pagliai
- * Date: 13/11/2017
- * Time: 14:29
- */
 
 namespace Weglot\TranslateBundle\DependencyInjection;
 
@@ -13,6 +8,10 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
+/**
+ * Class WeglotTranslateExtension
+ * @package Weglot\TranslateBundle\DependencyInjection
+ */
 class WeglotTranslateExtension extends Extension
 {
 
