@@ -68,7 +68,7 @@ weglot_translate:
 ```
 
 This is an example of configuration, enter your own API key, your original language and destination languages that you want.
-- `api_key` : is your personal API key. You can get an API Key by signing up on weglot.
+- `api_key` : is your personal API key. You can get an API Key by signing up on [Weglot](https://weglot.com/).
 - `original_language` : original language is the language of your website before translation.
 - `destination_languages` : are the languages that you want your website to be translated into.
 
