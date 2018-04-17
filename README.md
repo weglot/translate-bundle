@@ -30,7 +30,67 @@ require_once __DIR__. '/vendor/autoload.php';
 
 ## Getting Started
 
-TODO
+### Bundle Register
+
+#### Symfony 4
+
+Add Weglot bundle in the `config/bundles.php`:
+```php
+return [
+    Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
+    // ... Other bundles ...
+    Weglot\TranslateBundle\WeglotTranslateBundle::class => ['all' => true],
+];
+```
+
+#### Symfony 3 & 2
+
+Add Weglot bundle to `app/AppKernel.php` file:
+```php
+$bundles = array(
+    new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+    // ... Other bundles ...
+    new Weglot\TranslateBundle\WeglotTranslateBundle(),
+);
+```
+
+### Configuration
+
+For Symfony 4, create configuration file under `config/packages/weglot_translate.yml` and add following content.
+For Symfony 3 & 2, add following content to your `config.yml`.
+```yaml
+weglot_translate:
+    api_key: 'YOUR_WEGLOT_API_KEY'
+    original_language : 'en'
+    destination_languages:
+        - 'fr'
+        - 'de'
+```
+
+This is an example of configuration, enter your own API key, your original language and destination languages that you want.
+- `api_key` : is your personal API key. You can get an API Key by signing up on weglot.
+- `original_language` : original language is the language of your website before translation.
+- `destination_languages` : are the languages that you want your website to be translated into.
+
+There is also a non-required parameters `exclude_blocks` where you can list all blocks you don't want to be translated. For example, if I've a block with class "site-name", you've to do as following:
+```yaml
+    exclude_blocks:
+        - .site-name
+```
+
+### Optional - Language button
+
+You can add a language button if you're using Twig with function: `weglot_translate_render`
+
+Two layouts exists:
+```twig
+<!-- first layout (horizontal) -->
+{{ weglot_translate_render(1) }}
+
+<!-- first layout (vertical) -->
+{{ weglot_translate_render(2) }}
+```
+
 
 ## Examples
 
@@ -39,7 +99,7 @@ TODO
 ## About
 `translate-bundle` is guided and supported by the Weglot Developer Team.
 
-`translate-bundle` is maintained and funded by Weglot SAS. 
+`translate-bundle` is maintained and funded by Weglot SAS.
 The names and logos for `translate-bundle` are trademarks of Weglot SAS.
 
 ## License
