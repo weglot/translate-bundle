@@ -98,6 +98,7 @@ You'll find a short README with details about example on each repository
 
 - Symfony 4: https://github.com/weglot/translate-bundle-example-sf4
 - Symfony 3: https://github.com/weglot/translate-bundle-example-sf3
+- Symfony 2: https://github.com/weglot/translate-bundle-example-sf2
 
 ## About
 `translate-bundle` is guided and supported by the Weglot Developer Team.
