@@ -85,16 +85,18 @@ You can add a language button if you're using Twig with function: `weglot_transl
 Two layouts exists:
 ```twig
 <!-- first layout -->
-{{ weglot_translate_render(\Weglot\TranslateBundle\Twig\WeglotTemplate::HORIZONTAL) }}
+{{ weglot_translate_render(1) }}
 
 <!-- second layout -->
-{{ weglot_translate_render(\Weglot\TranslateBundle\Twig\WeglotTemplate::VERTICAL) }}
+{{ weglot_translate_render(2) }}
 ```
 
 
 ## Examples
 
-TODO
+You'll find a short README with details about example on each repository
+
+- Symfony 4: https://github.com/weglot/translate-bundle-example-sf4
 
 ## About
 `translate-bundle` is guided and supported by the Weglot Developer Team.
