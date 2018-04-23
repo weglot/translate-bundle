@@ -86,6 +86,20 @@ We implemented usage of `cache.app` service for both Symfony 4 and Symfony 3 (`s
 
 If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `cache.app` is using.
 
+### Optional - Hreflang links
+
+You can add hreflang links through the Twig function: `weglot_hreflang_render`
+
+Just put the function at the end of your `<head>` tag:
+```twig
+<html>
+    <head>
+        ...
+
+        {{ weglot_hreflang_render() }}
+    </head>
+```
+
 ### Optional - Language button
 
 You can add a language button if you're using Twig with function: `weglot_translate_render`
