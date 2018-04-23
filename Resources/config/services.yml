@@ -1,8 +1,4 @@
 services:
-    weglot_translate.library.client:
-        class: Weglot\Client\Client
-        arguments: ['%weglot.api_key%']
-
     weglot_translate.library.config_provider:
         class: Weglot\Parser\ConfigProvider\ServerConfigProvider
 

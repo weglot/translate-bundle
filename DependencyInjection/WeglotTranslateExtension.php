@@ -5,8 +5,11 @@ namespace Weglot\TranslateBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\Kernel;
+use Weglot\Client\Client;
 
 /**
  * Class WeglotTranslateExtension
@@ -31,7 +34,27 @@ class WeglotTranslateExtension extends Extension
         $container->setParameter('weglot.original_language', $config['original_language']);
         $container->setParameter('weglot.destination_languages', $config['destination_languages']);
 
+        // manually load client (if `cache:true` in config) to check if we using SF2 or later
+        $clientService = $container
+            ->register('weglot_translate.library.client', Client::class)
+            ->addArgument('%weglot.api_key%');
+        if ($config['cache'] &&
+            ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
+            $clientService->addMethodCall('setCacheItemPool', [new Reference('cache.app')]);
+        }
+
+        // then load all other dependencies
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+    }
+
+    /**
+     * @param string $subject
+     * @param string $needed
+     * @return bool
+     */
+    private function stringStartWith($subject, $needed)
+    {
+        return preg_match('#^' .$needed. '#i', $subject);
     }
 }
