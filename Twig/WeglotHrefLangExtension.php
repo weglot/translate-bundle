@@ -81,8 +81,6 @@ class WeglotHrefLangExtension extends \Twig_Extension
      */
     public function renderHrefLang(\Twig_Environment $twigEnvironment)
     {
-        $urls = $this->generateUrls();
-
         return $twigEnvironment->render(
             '@WeglotTranslate/hreflangs.html.twig',
             [
