@@ -35,7 +35,8 @@ class WeglotTranslateExtension extends Extension
         $clientService = $container
             ->register('weglot_translate.library.client', Client::class)
             ->addArgument('%weglot.api_key%');
-        if ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.')) {
+        if ($config['cache'] &&
+            ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
             $clientService->addMethodCall('setCacheItemPool', [new Reference('cache.app')]);
         }
 
