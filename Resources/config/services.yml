@@ -1,10 +1,4 @@
 services:
-    weglot_translate.library.client:
-        class: Weglot\Client\Client
-        arguments: ['%weglot.api_key%']
-        calls:
-          - [setCacheItemPool, ['@cache.app']]
-
     weglot_translate.library.config_provider:
         class: Weglot\Parser\ConfigProvider\ServerConfigProvider
 
