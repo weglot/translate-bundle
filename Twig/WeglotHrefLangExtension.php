@@ -34,11 +34,17 @@ class WeglotHrefLangExtension extends \Twig_Extension
 
     /**
      * WeglotHrefLangExtension constructor.
-     * @param $originalLanguage
+     * @param string $originalLanguage
      * @param array $destinationLanguages
+     * RequestStack $requestStack
+     * Router $router
      */
-    public function __construct($originalLanguage, array $destinationLanguages, RequestStack $requestStack, Router $router)
-    {
+    public function __construct(
+        $originalLanguage,
+        array $destinationLanguages,
+        RequestStack $requestStack,
+        Router $router
+    ) {
         $this->originalLanguage = $originalLanguage;
         $this->destinationLanguages = $destinationLanguages;
         $this->requestStack = $requestStack;
