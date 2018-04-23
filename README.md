@@ -88,7 +88,10 @@ If you wanna use cache, just add `cache: true` to this bundle configuration. It 
 
 ### Optional - Hreflang links
 
-You can add hreflang links through the Twig function: `weglot_hreflang_render`
+Hreflang links are a way to describe your website and to tell webcrawlers (such as search engines) if this page is available in other languages.
+More details on Google post about hreflang: https://support.google.com/webmasters/answer/189077
+
+You can add them through the Twig function: `weglot_hreflang_render`
 
 Just put the function at the end of your `<head>` tag:
 ```twig
