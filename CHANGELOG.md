@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Caching implementation for Symfony 3 & 4 based on `cache.app` system service
+- HrefLangs support for Twig through `{{ weglot_hreflang_render() }}` function in templates
 ### Changed
 - Updating README with Symfony 4, 3, 2 example
 ### Removed
