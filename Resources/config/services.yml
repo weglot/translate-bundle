@@ -28,6 +28,12 @@ services:
             - { name: twig.extension }
         arguments: ['@weglot_translate.library.languages_endpoint']
 
+    weglot_translate.extension.href_lang:
+        class: Weglot\TranslateBundle\Twig\WeglotHrefLangExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ['%weglot.original_language%', '%weglot.destination_languages%', '@request_stack', '@weglot_translate.routing.router']
+
     weglot_translate.routing.loader:
       class: Weglot\TranslateBundle\Routing\Loader
       public: false
