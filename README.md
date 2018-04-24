@@ -57,25 +57,50 @@ $bundles = array(
 ### Configuration
 
 For Symfony 4, create configuration file under `config/packages/weglot_translate.yml` and add following content.
-For Symfony 3 & 2, add following content to your `config.yml`.
+For Symfony 3 & 2, add following content to your `app/config/config.yml`.
 ```yaml
 weglot_translate:
     api_key: 'YOUR_WEGLOT_API_KEY'
     original_language : 'en'
+    cache: false
     destination_languages:
         - 'fr'
         - 'de'
 ```
 
 This is an example of configuration, enter your own API key, your original language and destination languages that you want.
-- `api_key` : is your personal API key. You can get an API Key by signing up on weglot.
+- `api_key` : is your personal API key. You can get an API Key by signing up on [Weglot](https://weglot.com/).
 - `original_language` : original language is the language of your website before translation.
 - `destination_languages` : are the languages that you want your website to be translated into.
+- `cache` : if you wanna use cache or not. It's not a required field and set as false by default. Look at [Caching part](#caching) for more details.
 
 There is also a non-required parameters `exclude_blocks` where you can list all blocks you don't want to be translated. For example, if I've a block with class "site-name", you've to do as following:
 ```yaml
     exclude_blocks:
         - .site-name
+```
+
+### Caching
+
+We implemented usage of `cache.app` service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so no compatibility for Symfony 2).
+
+If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `cache.app` is using.
+
+### Optional - Hreflang links
+
+Hreflang links are a way to describe your website and to tell webcrawlers (such as search engines) if this page is available in other languages.
+More details on Google post about hreflang: https://support.google.com/webmasters/answer/189077
+
+You can add them through the Twig function: `weglot_hreflang_render`
+
+Just put the function at the end of your `<head>` tag:
+```twig
+<html>
+    <head>
+        ...
+
+        {{ weglot_hreflang_render() }}
+    </head>
 ```
 
 ### Optional - Language button
@@ -85,16 +110,20 @@ You can add a language button if you're using Twig with function: `weglot_transl
 Two layouts exists:
 ```twig
 <!-- first layout -->
-{{ weglot_translate_render(\Weglot\TranslateBundle\Twig\WeglotTemplate::HORIZONTAL) }}
+{{ weglot_translate_render(1) }}
 
 <!-- second layout -->
-{{ weglot_translate_render(\Weglot\TranslateBundle\Twig\WeglotTemplate::VERTICAL) }}
+{{ weglot_translate_render(2) }}
 ```
 
 
 ## Examples
 
-TODO
+You'll find a short README with details about example on each repository
+
+- Symfony 4: https://github.com/weglot/translate-bundle-example-sf4
+- Symfony 3: https://github.com/weglot/translate-bundle-example-sf3
+- Symfony 2: https://github.com/weglot/translate-bundle-example-sf2
 
 ## About
 `translate-bundle` is guided and supported by the Weglot Developer Team.

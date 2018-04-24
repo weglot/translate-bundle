@@ -82,22 +82,4 @@ class WeglotButtonExtension extends \Twig_Extension
             ]
         );
     }
-
-
-    public function getFilters()
-    {
-        return [
-            new \Twig_SimpleFilter('language', [$this, 'languageFilter']),
-        ];
-    }
-
-    public function languageFilter($locale, $getEnglish = true)
-    {
-        $language = $this->languageCollection->getCode($locale);
-
-        if ($getEnglish) {
-            return $language->getEnglishName();
-        }
-        return $language->getLocalName();
-    }
 }

@@ -6,13 +6,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.5]
+## [0.6] - 24/04/2018
+### Added
+- Caching implementation for Symfony 3 & 4 based on `cache.app` system service
+- HrefLangs support for Twig through `{{ weglot_hreflang_render() }}` function in templates
+### Changed
+- Updating README with Symfony 4, 3, 2 example
+### Removed
+- Twig template enum (not working well)
+
+## [0.5] - 17/04/2018
 ### Added
 - Using [Weglot PHP library](https://github.com/weglot/weglot-php) to communicate with Weglot API.
 ### Removed
 - Services classes
 
-## [0.3]
+## [0.3] - 06/04/2018
 ### Added
 - `php-cs-fixer` configuration file
 
@@ -22,11 +31,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - camelCase support
 
-## [0.2]
+## [0.2] - 07/03/2018
 ### Added
 - README
 - 2 templates for Twig with languages routes
 
-## [0.1.0]
+## [0.1] - 16/11/2018
 ### Added
 - Implement Weglot translate api with custom routing
