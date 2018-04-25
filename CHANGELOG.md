@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.2] - 25/04/2018
+### Fixed
+- Exception when Twig filter `language` is used with a non-valid ISO 639-1 code
+
 ## [0.6] - 24/04/2018
 ### Added
 - Caching implementation for Symfony 3 & 4 based on `cache.app` system service

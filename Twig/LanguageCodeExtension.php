@@ -3,6 +3,7 @@
 namespace Weglot\TranslateBundle\Twig;
 
 use Weglot\Client\Api\LanguageCollection;
+use Weglot\Client\Api\LanguageEntry;
 use Weglot\Client\Endpoint\Languages;
 
 /**
@@ -35,6 +36,10 @@ class LanguageCodeExtension extends \Twig_Extension
     public function languageFilter($locale, $getEnglish = true)
     {
         $language = $this->languageCollection->getCode($locale);
+
+        if (!$language instanceof LanguageEntry) {
+            return '';
+        }
 
         if ($getEnglish) {
             return $language->getEnglishName();
