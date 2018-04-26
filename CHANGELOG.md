@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [0.6.2] - 25/04/2018
+### Changed
+- Updated weglot/weglot-php library version
+
+## [0.6.2] - 25/04/2018
 ### Fixed
 - Exception when Twig filter `language` is used with a non-valid ISO 639-1 code
 
