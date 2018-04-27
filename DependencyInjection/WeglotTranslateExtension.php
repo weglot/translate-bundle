@@ -34,7 +34,21 @@ class WeglotTranslateExtension extends Extension
         $container->setParameter('weglot.original_language', $config['original_language']);
         $container->setParameter('weglot.destination_languages', $config['destination_languages']);
 
-        // manually load client (if `cache:true` in config) to check if we using SF2 or later
+        $this->manualServicesLoad($config, $container);
+
+        // then load all other dependencies
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+    }
+
+    /**
+     * Manually load client (if `cache:true` in config) to check if we using SF2 or later
+     *
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    protected function manualServicesLoad(array $config, ContainerBuilder $container)
+    {
         $clientService = $container
             ->register('weglot_translate.library.client', Client::class)
             ->addArgument('%weglot.api_key%');
@@ -42,10 +56,6 @@ class WeglotTranslateExtension extends Extension
             ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
             $clientService->addMethodCall('setCacheItemPool', [new Reference('cache.app')]);
         }
-
-        // then load all other dependencies
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
     }
 
     /**
