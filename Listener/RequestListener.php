@@ -71,20 +71,31 @@ class RequestListener implements EventSubscriberInterface
     {
         if (!$event->getRequest()->isXmlHttpRequest()) {
             $request = $event->getRequest();
-            $response = $event->getResponse();
 
-            $languageFrom = $request->getDefaultLocale();
-            $languageTo = $request->getLocale();
+            if ($this->needsTranslation($event)) {
+                $response = $event->getResponse();
 
-            $router_path_check = ($request->request->has('_weglot_router_path') &&
-                !in_array($request->request->get('_weglot_router_path'), $this->bannedRoutes));
-
-            if ($router_path_check &&
-                $languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages)) {
-                $content = $response->getContent();
-                $translatedContent = $this->parser->translate($content, $languageFrom, $languageTo);
+                $translatedContent = $this->parser->translate($response->getContent(), $request->getDefaultLocale(), $request->getLocale());
                 $response->setContent($translatedContent);
             }
         }
+    }
+
+    /**
+     * @param FilterResponseEvent $event
+     * @return bool
+     */
+    protected function needsTranslation(FilterResponseEvent $event)
+    {
+        $request = $event->getRequest();
+
+        $languageFrom = $request->getDefaultLocale();
+        $languageTo = $request->getLocale();
+
+        $routerPathCheck = ($request->request->has('_weglot_router_path') &&
+                                !in_array($request->request->get('_weglot_router_path'), $this->bannedRoutes));
+        $isLanguageOk = ($languageFrom != $languageTo && in_array($languageTo, $this->destinationLanguages));
+
+        return $routerPathCheck && $isLanguageOk;
     }
 }
