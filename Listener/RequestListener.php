@@ -7,7 +7,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Weglot\Client\Api\Exception\ApiError;
+use Weglot\Client\Api\Exception\InputAndOutputCountMatchException;
+use Weglot\Client\Api\Exception\InvalidWordTypeException;
+use Weglot\Client\Api\Exception\MissingRequiredParamException;
+use Weglot\Client\Api\Exception\MissingWordsOutputException;
 use Weglot\Parser\Parser;
+use Psr\Cache\InvalidArgumentException;
 
 /**
  * Class RequestListener
@@ -41,7 +47,9 @@ class RequestListener implements EventSubscriberInterface
         $this->destinationLanguages = $destinationLanguages;
     }
 
-
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -50,10 +58,15 @@ class RequestListener implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-    }
-
+    /**
+     * @param FilterResponseEvent $event
+     * @throws InvalidArgumentException
+     * @throws ApiError
+     * @throws InputAndOutputCountMatchException
+     * @throws InvalidWordTypeException
+     * @throws MissingRequiredParamException
+     * @throws MissingWordsOutputException
+     */
     public function onKernelResponse(FilterResponseEvent $event)
     {
         if (!$event->getRequest()->isXmlHttpRequest()) {
