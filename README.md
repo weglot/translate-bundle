@@ -4,6 +4,7 @@
 # Symfony Translate Bundle
 
 <!-- tags -->
+[![WeglotSlack](https://weglot-community.now.sh/badge.svg)](https://weglot-community.now.sh/)
 [![Latest Stable Version](https://poser.pugx.org/weglot/translate-bundle/v/stable)](https://packagist.org/packages/weglot/translate-bundle)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b1785d1e9225869f3da0/maintainability)](https://codeclimate.com/github/weglot/translate-bundle/maintainability)
 [![License](https://poser.pugx.org/weglot/translate-bundle/license)](https://packagist.org/packages/weglot/translate-bundle)
