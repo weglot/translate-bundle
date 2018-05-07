@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.3] - 25/04/2018
+### Added
+- Adding slack tag in README
+### Changed
+- Updated weglot/weglot-php library version
+
 ## [0.6.2] - 25/04/2018
 ### Changed
 - Updated weglot/weglot-php library version
