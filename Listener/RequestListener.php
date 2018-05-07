@@ -14,6 +14,7 @@ use Weglot\Client\Api\Exception\MissingRequiredParamException;
 use Weglot\Client\Api\Exception\MissingWordsOutputException;
 use Weglot\Parser\Parser;
 use Psr\Cache\InvalidArgumentException;
+use Weglot\TranslateBundle\WeglotTranslateBundle;
 
 /**
  * Class RequestListener
@@ -45,6 +46,9 @@ class RequestListener implements EventSubscriberInterface
     {
         $this->parser = $parser;
         $this->destinationLanguages = $destinationLanguages;
+
+        // setting HttpClient user-agent
+        $this->parser->getClient()->getHttpClient()->addUserAgentInfo('symfony', WeglotTranslateBundle::VERSION);
     }
 
     /**
