@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\Kernel;
 use Weglot\Client\Client;
-use Weglot\TranslateBundle\WeglotTranslateBundle;
 
 /**
  * Class WeglotTranslateExtension
@@ -54,7 +53,6 @@ class WeglotTranslateExtension extends Extension
         $clientService = $container
             ->register('weglot_translate.library.client', Client::class)
             ->addArgument('%weglot.api_key%');
-        $clientService->addMethodCall('addUserAgentInfo', ['symfony', WeglotTranslateBundle::VERSION]);
         if ($config['cache'] &&
             ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
             $clientService->addMethodCall('setCacheItemPool', [new Reference('cache.app')]);
