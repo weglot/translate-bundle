@@ -13,6 +13,13 @@ use Weglot\TranslateBundle\DependencyInjection\Compiler\RouterCompilerPass;
 class WeglotTranslateBundle extends Bundle
 {
     /**
+     * Integration version
+     *
+     * @var string
+     */
+    const VERSION = '0.6.4';
+
+    /**
      * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
