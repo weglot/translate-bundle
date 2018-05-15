@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.8] - 2018-05-15
+### Changed
+- Updated weglot/weglot-php library version
+
 ## [0.6.7] - 2018-05-07
 ### Fixed
 - removing useless subscribed event
