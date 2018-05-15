@@ -5,6 +5,7 @@ namespace Weglot\TranslateBundle\Twig;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Weglot\TranslateBundle\Routing\Router;
+use Weglot\Util\Url;
 
 /**
  * Class WeglotHrefLangExtension
@@ -87,34 +88,9 @@ class WeglotHrefLangExtension extends \Twig_Extension
      */
     public function renderHrefLang(\Twig_Environment $twigEnvironment)
     {
-        return $twigEnvironment->render(
-            '@WeglotTranslate/hreflangs.html.twig',
-            [
-                'urls' => $this->generateUrls()
-            ]
-        );
-    }
-
-    /**
-     * @return array
-     */
-    protected function generateUrls()
-    {
-        // get current route
         $request = $this->requestStack->getCurrentRequest();
-        $route = $request->attributes->get('_route');
+        $url = new Url($request->getUri(), $this->originalLanguage, $this->destinationLanguages);
 
-        // generate all possible urls
-        $urls = [];
-
-        // for original language
-        $urls[$this->originalLanguage] = $this->router->generate($route, ['_locale' => $this->originalLanguage]);
-
-        // for destination languages
-        foreach ($this->destinationLanguages as $language) {
-            $urls[$language] = $this->router->generate($route, ['_locale' => $language]);
-        }
-
-        return $urls;
+        return $url->generateHrefLangsTags();
     }
 }
