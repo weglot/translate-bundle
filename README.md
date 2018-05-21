@@ -85,7 +85,7 @@ There is also a non-required parameters `exclude_blocks` where you can list all 
 
 We implemented usage of `weglot.translations` service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so no compatibility for Symfony 2).
 
-If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `weglot.translations` is using.
+If you wanna use cache, just add `cache: true` to this bundle configuration. It will use a file-based cache through Symfony [`FilesystemAdapter`](https://symfony.com/doc/current/components/cache/adapters/filesystem_adapter.html)
 
 To clear the cache, you just have to use our custom command:
 ```
