@@ -59,15 +59,15 @@ class CacheClearCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $io = new SymfonyStyle($input, $output);
+        $console = new SymfonyStyle($input, $output);
 
         $adapter = $this->getContainer()->get('weglot_translate.cache.translations');
 
         if ($adapter->clear()) {
-            $io->success('Weglot translations cache cleared !');
+            $console->success('Weglot translations cache cleared !');
             return;
         }
-        $io->error('Error while clearing Weglot translations cache.');
+        $console->error('Error while clearing Weglot translations cache.');
         return;
     }
 }
