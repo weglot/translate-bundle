@@ -83,9 +83,9 @@ There is also a non-required parameters `exclude_blocks` where you can list all 
 
 ### Caching
 
-We implemented usage of `cache.app` service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so no compatibility for Symfony 2).
+We implemented usage of `weglot.translations` service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so no compatibility for Symfony 2).
 
-If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `cache.app` is using.
+If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `weglot.translations` is using.
 
 ### Optional - Hreflang links
 
