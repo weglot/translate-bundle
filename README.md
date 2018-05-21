@@ -87,6 +87,11 @@ We implemented usage of `weglot.translations` service for both Symfony 4 and Sym
 
 If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `weglot.translations` is using.
 
+To clear the cache, you just have to use our custom command:
+```
+$ php bin/console weglot:cache:clear
+```
+
 ### Optional - Hreflang links
 
 Hreflang links are a way to describe your website and to tell webcrawlers (such as search engines) if this page is available in other languages.
