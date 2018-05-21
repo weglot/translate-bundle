@@ -39,6 +39,7 @@ class WeglotTranslateExtension extends Extension
         // then load all other dependencies
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('console.yml');
     }
 
     /**
@@ -53,9 +54,17 @@ class WeglotTranslateExtension extends Extension
         $clientService = $container
             ->register('weglot_translate.library.client', Client::class)
             ->addArgument('%weglot.api_key%');
+
         if ($config['cache'] &&
             ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
-            $clientService->addMethodCall('setCacheItemPool', [new Reference('cache.app')]);
+            // register cache object
+            $container
+                ->register('weglot_translate.cache.translations', FilesystemAdapter::class)
+                ->setArguments(['weglot.translations'])
+                ->setPublic(true);
+
+            // then using it as PSR-6 cache pool
+            $clientService->addMethodCall('setCacheItemPool', [new Reference('weglot_translate.cache.translations')]);
         }
     }
 
