@@ -5,6 +5,7 @@ namespace Weglot\TranslateBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class CacheClearCommand extends Command
 {
@@ -55,11 +56,18 @@ class CacheClearCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return bool
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+
         $adapter = $this->getContainer()->get('weglot_translate.cache.translations');
-        return $adapter->clear();
+
+        if ($adapter->clear()) {
+            $io->success('Weglot translations cache cleared !');
+            return;
+        }
+        $io->error('Error while clearing Weglot translations cache.');
+        return;
     }
 }
