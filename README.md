@@ -23,6 +23,9 @@ You can install the library via [Composer](https://getcomposer.org/). Run the fo
 composer require weglot/translate-bundle
 ```
 
+When you require the bundle with `symfony/flex` (available for `symfony/symfony:^4.0`) it should ask you if you wanna execute a recipe, tell yes.
+Like that it will make bundle registration in `config/bundles.php` & default config creation in `config/packages/weglot_translate.yaml`.
+
 To use the library, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
 
 ```php
@@ -35,10 +38,7 @@ require_once __DIR__. '/vendor/autoload.php';
 
 #### Symfony 4
 
-When you require the bundle with `symfony/flex` it should ask you if you wanna execute recipe, tell `yes`.
-Like that it will make bundle registration in `config/bundles.php` & default config creation in `config/packages/weglot_translate.yml`.
-
-Otherwise, you still can use the old way and add Weglot bundle in the `config/bundles.php`:
+Add Weglot bundle in the `config/bundles.php`:
 ```php
 return [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
