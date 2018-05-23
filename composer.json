@@ -25,11 +25,19 @@
     "docs": "https://developers.weglot.com/symfony"
   },
   "keywords": [
+    "php",
     "weglot",
+    "weglot-integration",
     "translate",
     "translation",
+    "translator",
     "localization",
-    "languages"
+    "languages",
+    "i18n",
+    "symfony",
+    "symfony4",
+    "symfony3",
+    "symfony2"
   ],
   "license": "MIT",
   "require": {
