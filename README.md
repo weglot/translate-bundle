@@ -35,7 +35,10 @@ require_once __DIR__. '/vendor/autoload.php';
 
 #### Symfony 4
 
-Add Weglot bundle in the `config/bundles.php`:
+When you require the bundle with `symfony/flex` it should ask you if you wanna execute recipe, tell `yes`.
+Like that it will make bundle registration in `config/bundles.php` & default config creation in `config/packages/weglot_translate.yml`.
+
+Otherwise, you still can use the old way and add Weglot bundle in the `config/bundles.php`:
 ```php
 return [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
