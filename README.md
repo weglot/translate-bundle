@@ -14,7 +14,7 @@ Seamless integration of Weglot into your Symfony project.
 
 ## Requirements
 - PHP version 5.5 and later
-- Weglot API Key, starting at [free level](https://dashboard.weglot.com/register)
+- Weglot API Key, starting at [free level](https://dashboard.weglot.com/register?origin=8)
 
 ## Installation
 You can install the library via [Composer](https://getcomposer.org/). Run the following command:
