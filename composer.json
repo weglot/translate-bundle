@@ -1,6 +1,7 @@
 {
   "name": "weglot/translate-bundle",
   "description": "Seamless integration of Weglot into your Symfony project",
+  "homepage": "https://weglot.com/",
   "type": "symfony-bundle",
   "authors": [
     {
