@@ -19,6 +19,11 @@
       "role": "Developer"
     }
   ],
+  "support": {
+    "email": "support@weglot.com",
+    "source": "https://github.com/weglot/translate-bundle",
+    "docs": "https://developers.weglot.com/symfony"
+  },
   "keywords": [
     "weglot",
     "translate",
