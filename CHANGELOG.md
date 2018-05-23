@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New command to clear our cache adapter
 ### Removed
 - `cache.app` usage has been removed
+### Changed
+- Updating `composer.json`
 
 ## [0.6.9] - 2018-05-15
 ### Changed
