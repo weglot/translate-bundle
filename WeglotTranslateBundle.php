@@ -17,7 +17,7 @@ class WeglotTranslateBundle extends Bundle
      *
      * @var string
      */
-    const VERSION = '0.6.10';
+    const VERSION = '0.6.11';
 
     /**
      * {@inheritdoc}
