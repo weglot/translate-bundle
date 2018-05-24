@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Updating `composer.json`
 
+## [0.6.11] 2018-05-24
+### Fixed
+- Removing too early service import
+
 ## [0.6.10] - 2018-05-23
 ### Fixed
 - Missing import in DI
