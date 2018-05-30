@@ -17,19 +17,19 @@ services:
         arguments: ['@weglot_translate.library.parser', '%weglot.destination_languages%']
 
     weglot_translate.extension.weglot_button:
-        class: Weglot\TranslateBundle\Twig\WeglotButtonExtension
+        class: Weglot\TranslateBundle\Twig\Extensions\Button
         tags:
             - { name: twig.extension }
         arguments: ['%weglot.original_language%', '%weglot.destination_languages%', '@weglot_translate.library.languages_endpoint']
 
     weglot_translate.extension.language_code:
-        class: Weglot\TranslateBundle\Twig\LanguageCodeExtension
+        class: Weglot\TranslateBundle\Twig\Extensions\LanguageCode
         tags:
             - { name: twig.extension }
         arguments: ['@weglot_translate.library.languages_endpoint']
 
     weglot_translate.extension.href_lang:
-        class: Weglot\TranslateBundle\Twig\WeglotHrefLangExtension
+        class: Weglot\TranslateBundle\Twig\Extensions\HrefLang
         tags:
             - { name: twig.extension }
         arguments: ['%weglot.original_language%', '%weglot.destination_languages%', '@request_stack', '@weglot_translate.routing.router']
