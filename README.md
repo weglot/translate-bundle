@@ -14,7 +14,7 @@ Seamless integration of Weglot into your Symfony project.
 
 ## Requirements
 - PHP version 5.5 and later
-- Weglot API Key, starting at [free level](https://dashboard.weglot.com/register)
+- Weglot API Key, starting at [free level](https://dashboard.weglot.com/register?origin=8)
 
 ## Installation
 You can install the library via [Composer](https://getcomposer.org/). Run the following command:
@@ -22,6 +22,9 @@ You can install the library via [Composer](https://getcomposer.org/). Run the fo
 ```bash
 composer require weglot/translate-bundle
 ```
+
+When you require the bundle with `symfony/flex` (available for `symfony/symfony:^4.0`) it should ask you if you wanna execute a recipe, tell yes.
+Like that it will make bundle registration in `config/bundles.php` & default config creation in `config/packages/weglot_translate.yaml`.
 
 To use the library, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
 
@@ -70,7 +73,7 @@ weglot_translate:
 ```
 
 This is an example of configuration, enter your own API key, your original language and destination languages that you want.
-- `api_key` : is your personal API key. You can get an API Key by signing up on [Weglot](https://weglot.com/).
+- `api_key` : is your personal API key. You can get an API Key by signing up on [Weglot](https://dashboard.weglot.com/register?origin=8).
 - `original_language` : original language is the language of your website before translation.
 - `destination_languages` : are the languages that you want your website to be translated into.
 - `cache` : if you wanna use cache or not. It's not a required field and set as false by default. Look at [Caching part](#caching) for more details.
@@ -83,9 +86,14 @@ There is also a non-required parameters `exclude_blocks` where you can list all 
 
 ### Caching
 
-We implemented usage of `cache.app` service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so no compatibility for Symfony 2).
+We implemented usage of cache pool service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so there is no compatibility for Symfony 2).
 
-If you wanna use cache, just add `cache: true` to this bundle configuration. It will use whatever `cache.app` is using.
+If you wanna use cache, just add `cache: true` to this bundle configuration. It will use a file-based cache through Symfony `cache.system` service.
+
+To clear the cache, you just have to use the usual pool clear command:
+```
+$ php bin/console cache:pool:clear weglot_translate.cache
+```
 
 ### Optional - Hreflang links
 

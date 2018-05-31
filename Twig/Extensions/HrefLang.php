@@ -1,6 +1,6 @@
 <?php
 
-namespace Weglot\TranslateBundle\Twig;
+namespace Weglot\TranslateBundle\Twig\Extensions;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -8,10 +8,10 @@ use Weglot\TranslateBundle\Routing\Router;
 use Weglot\Util\Url;
 
 /**
- * Class WeglotHrefLangExtension
- * @package Weglot\TranslateBundle\Twig
+ * Class HrefLang
+ * @package Weglot\TranslateBundle\Twig\Extensions
  */
-class WeglotHrefLangExtension extends \Twig_Extension
+class HrefLang extends \Twig_Extension
 {
     /**
      * @var string

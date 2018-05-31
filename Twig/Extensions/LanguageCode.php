@@ -1,16 +1,16 @@
 <?php
 
-namespace Weglot\TranslateBundle\Twig;
+namespace Weglot\TranslateBundle\Twig\Extensions;
 
 use Weglot\Client\Api\LanguageCollection;
 use Weglot\Client\Api\LanguageEntry;
 use Weglot\Client\Endpoint\Languages;
 
 /**
- * Class LanguageCodeExtension
- * @package Weglot\TranslateBundle\Twig
+ * Class LanguageCode
+ * @package Weglot\TranslateBundle\Twig\Extensions
  */
-class LanguageCodeExtension extends \Twig_Extension
+class LanguageCode extends \Twig_Extension
 {
     /**
      * @var LanguageCollection

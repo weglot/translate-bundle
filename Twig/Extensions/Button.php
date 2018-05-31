@@ -1,15 +1,15 @@
 <?php
 
-namespace Weglot\TranslateBundle\Twig;
+namespace Weglot\TranslateBundle\Twig\Extensions;
 
 use Weglot\Client\Api\LanguageCollection;
 use Weglot\Client\Endpoint\Languages;
 
 /**
- * Class WeglotButtonExtension
- * @package Weglot\TranslateBundle\Twig
+ * Class Button
+ * @package Weglot\TranslateBundle\Twig\Extensions
  */
-class WeglotButtonExtension extends \Twig_Extension
+class Button extends \Twig_Extension
 {
     /**
      * @var string

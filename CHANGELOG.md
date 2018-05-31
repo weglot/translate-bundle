@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.0] 2018-05-31
+### Added
+- Creating our own cache adapter `weglot.translations`
+- New command to clear our cache adapter
+- Using clean Symfony cache pool
+### Removed
+- `cache.app` usage has been removed
+### Changed
+- Updating `composer.json`
+
 ## [0.6.11] 2018-05-24
 ### Fixed
 - Removing too early service import

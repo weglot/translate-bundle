@@ -1,6 +1,7 @@
 {
   "name": "weglot/translate-bundle",
   "description": "Seamless integration of Weglot into your Symfony project",
+  "homepage": "https://weglot.com/",
   "type": "symfony-bundle",
   "authors": [
     {
@@ -16,21 +17,35 @@
     {
       "name": "Baptiste Leduc",
       "email": "baptiste@weglot.com",
+      "homepage": "https://baptiste-leduc.now.sh/",
       "role": "Developer"
     }
   ],
+  "support": {
+    "email": "support@weglot.com",
+    "source": "https://github.com/weglot/translate-bundle",
+    "docs": "https://developers.weglot.com/symfony"
+  },
   "keywords": [
+    "php",
     "weglot",
+    "weglot-integration",
     "translate",
     "translation",
+    "translator",
     "localization",
-    "languages"
+    "languages",
+    "i18n",
+    "symfony",
+    "symfony4",
+    "symfony3",
+    "symfony2"
   ],
   "license": "MIT",
   "require": {
     "php": ">=5.5",
     "ext-mbstring": "*",
-    "weglot/weglot-php": "^0.4"
+    "weglot/weglot-php": "^0.5"
   },
   "autoload": {
     "psr-4": {

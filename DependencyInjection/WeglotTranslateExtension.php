@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Weglot\Client\Client;
 
 /**
@@ -40,6 +40,7 @@ class WeglotTranslateExtension extends Extension
         // then load all other dependencies
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('twig.yml');
     }
 
     /**
@@ -58,13 +59,13 @@ class WeglotTranslateExtension extends Extension
         if ($config['cache'] &&
             ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
             // register cache object
-            $container
-                ->register('weglot_translate.cache.translations', FilesystemAdapter::class)
-                ->setArguments(['weglot.translations'])
-                ->setPublic(true);
+            $definition = new ChildDefinition('cache.system');
+            $definition->setPublic(false);
+            $definition->addTag('cache.pool');
+            $container->setDefinition('weglot_translate.cache', $definition);
 
             // then using it as PSR-6 cache pool
-            $clientService->addMethodCall('setCacheItemPool', [new Reference('weglot_translate.cache.translations')]);
+            $clientService->addMethodCall('setCacheItemPool', [new Reference('weglot_translate.cache')]);
         }
     }
 
