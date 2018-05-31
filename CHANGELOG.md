@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Creating our own cache adapter `weglot.translations`
 - New command to clear our cache adapter
+- Using clean Symfony cache pool
 ### Removed
 - `cache.app` usage has been removed
 ### Changed
