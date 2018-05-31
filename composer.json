@@ -45,7 +45,7 @@
   "require": {
     "php": ">=5.5",
     "ext-mbstring": "*",
-    "weglot/weglot-php": "^0.4"
+    "weglot/weglot-php": "^0.5"
   },
   "autoload": {
     "psr-4": {
