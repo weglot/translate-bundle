@@ -86,13 +86,13 @@ There is also a non-required parameters `exclude_blocks` where you can list all 
 
 ### Caching
 
-We implemented usage of `weglot.translations` service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so no compatibility for Symfony 2).
+We implemented usage of cache pool service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so there is no compatibility for Symfony 2).
 
-If you wanna use cache, just add `cache: true` to this bundle configuration. It will use a file-based cache through Symfony [`FilesystemAdapter`](https://symfony.com/doc/current/components/cache/adapters/filesystem_adapter.html)
+If you wanna use cache, just add `cache: true` to this bundle configuration. It will use a file-based cache through Symfony `cache.system` service.
 
-To clear the cache, you just have to use our custom command:
+To clear the cache, you just have to use the usual pool clear command:
 ```
-$ php bin/console weglot:cache:clear
+$ php bin/console cache:pool:clear weglot_translate.cache
 ```
 
 ### Optional - Hreflang links
