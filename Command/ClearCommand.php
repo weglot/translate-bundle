@@ -6,6 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class CacheClearCommand extends Command
 {
@@ -56,6 +57,7 @@ class CacheClearCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
