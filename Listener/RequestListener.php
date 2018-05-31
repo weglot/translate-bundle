@@ -48,7 +48,7 @@ class RequestListener implements EventSubscriberInterface
         $this->destinationLanguages = $destinationLanguages;
 
         // setting HttpClient user-agent
-        $this->parser->getClient()->getHttpClient()->addUserAgentInfo('symfony', WeglotTranslateBundle::VERSION);
+        $this->parser->getClient()->getHttpClient()->addUserAgentInfo('symfony', 'Symfony\\' . WeglotTranslateBundle::VERSION);
     }
 
     /**
