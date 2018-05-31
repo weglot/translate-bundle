@@ -5,7 +5,6 @@ namespace Weglot\TranslateBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Weglot\TranslateBundle\DependencyInjection\Compiler\RouterCompilerPass;
-use Weglot\TranslateBundle\DependencyInjection\Compiler\TwigCompilerPass;
 
 /**
  * Class WeglotTranslateBundle
@@ -26,6 +25,5 @@ class WeglotTranslateBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RouterCompilerPass());
-        $container->addCompilerPass(new TwigCompilerPass());
     }
 }
