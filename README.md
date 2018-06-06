@@ -58,18 +58,41 @@ $bundles = array(
 );
 ```
 
-### Configuration
+### Quick configuration
 
-For Symfony 4, create configuration file under `config/packages/weglot_translate.yml` and add following content.
-For Symfony 3 & 2, add following content to your `app/config/config.yml`.
+For Symfony 4, create configuration file under `config/packages/weglot_translate.yaml` and add following content.
+For Symfony 3 & 2, add following content to your `app/config/config.yaml`.
+
 ```yaml
 weglot_translate:
-    api_key: 'YOUR_WEGLOT_API_KEY'
+    api_key: '%env(WG_API_KEY)%'
     original_language : 'en'
-    cache: false
+    cache: true
     destination_languages:
         - 'fr'
         - 'de'
+```
+
+This is the default configuration file, if you want more default, check next part.
+
+## Configuration
+
+As already said, depending on Symfony version, we've different configuration file paths:
+- Symfony 4: `config/packages/weglot_translate.yaml`
+- Symfony 3 & 2: `app/config/config.yaml`
+
+There is a full configuration file:
+
+```yaml
+weglot_translate:
+  api_key: 'YOUR_WEGLOT_API_KEY'
+  original_language : 'en'
+  cache: false
+  destination_languages:
+    - 'fr'
+    - 'de'
+  exclude_blocks:
+    - '.material-icons'
 ```
 
 This is an example of configuration, enter your own API key, your original language and destination languages that you want.
@@ -78,24 +101,12 @@ This is an example of configuration, enter your own API key, your original langu
 - `destination_languages` : are the languages that you want your website to be translated into.
 - `cache` : if you wanna use cache or not. It's not a required field and set as false by default. Look at [Caching part](#caching) for more details.
 
-There is also a non-required parameters `exclude_blocks` where you can list all blocks you don't want to be translated. For example, if I've a block with class "site-name", you've to do as following:
-```yaml
-    exclude_blocks:
-        - .site-name
-```
+There is also a non-required parameters:
+- `exclude_blocks` : You can list here all blocks you don't want to be translated. In this example, we won't translate all DOM tags with "material-icons" class.
 
-### Caching
+## Twig extensions
 
-We implemented usage of cache pool service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so there is no compatibility for Symfony 2).
-
-If you wanna use cache, just add `cache: true` to this bundle configuration. It will use a file-based cache through Symfony `cache.system` service.
-
-To clear the cache, you just have to use the usual pool clear command:
-```
-$ php bin/console cache:pool:clear weglot_translate.cache
-```
-
-### Optional - Hreflang links
+### Hreflang links
 
 Hreflang links are a way to describe your website and to tell webcrawlers (such as search engines) if this page is available in other languages.
 More details on Google post about hreflang: https://support.google.com/webmasters/answer/189077
@@ -112,7 +123,7 @@ Just put the function at the end of your `<head>` tag:
     </head>
 ```
 
-### Optional - Language button
+### Language button
 
 You can add a language button if you're using Twig with function: `weglot_translate_render`
 
@@ -125,6 +136,16 @@ Two layouts exists:
 {{ weglot_translate_render(2) }}
 ```
 
+## Caching
+
+We implemented usage of cache pool service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so there is no compatibility for Symfony 2).
+
+If you wanna use cache, just add `cache: true` to this bundle configuration. It will use a file-based cache through Symfony `cache.system` service.
+
+To clear the cache, you just have to use the usual pool clear command:
+```
+$ php bin/console cache:pool:clear weglot_translate.cache
+```
 
 ## Examples
 
