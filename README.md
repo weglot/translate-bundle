@@ -136,6 +136,19 @@ Two layouts exists:
 {{ weglot_translate_render(2) }}
 ```
 
+### Language code
+
+Simple filter to convert ISO 639-1 code to full language name. It can takes one boolean parameter that allow you to choose having english name or original language name.
+
+Here is some examples:
+```twig
+<!-- Will return english name for given code, here: "Bulgarian" -->
+{{ 'bg' | language }}
+
+<!-- Will return original name for given code, here: "български" -->
+{{ 'bg' | language(false) }}
+```
+
 ## Caching
 
 We implemented usage of cache pool service for both Symfony 4 and Symfony 3 (`symfony/cache` bundle was released with Symfony 3, so there is no compatibility for Symfony 2).
