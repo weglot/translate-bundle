@@ -85,7 +85,7 @@ There is a full configuration file:
 
 ```yaml
 weglot_translate:
-  api_key: 'YOUR_WEGLOT_API_KEY'
+  api_key: '%env(WG_API_KEY)%'
   original_language : 'en'
   cache: false
   destination_languages:
