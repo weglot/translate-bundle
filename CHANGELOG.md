@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.1] 2018-07-05
+### Changed
+- Updating `composer.json`
+
 ## [0.7.0] 2018-05-31
 ### Added
 - Creating our own cache adapter `weglot.translations`
