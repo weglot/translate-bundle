@@ -34,6 +34,7 @@ class WeglotTranslateExtension extends Extension
         $container->setParameter('weglot.exclude_blocks', $config['exclude_blocks']);
         $container->setParameter('weglot.original_language', $config['original_language']);
         $container->setParameter('weglot.destination_languages', $config['destination_languages']);
+        $container->setParameter('weglot.api_host', $config['api_host']);
 
         $this->manualServicesLoad($config, $container);
 
@@ -54,7 +55,8 @@ class WeglotTranslateExtension extends Extension
     {
         $clientService = $container
             ->register('weglot_translate.library.client', Client::class)
-            ->addArgument('%weglot.api_key%');
+            ->addArgument('%weglot.api_key%')
+            ->addArgument(['host' => '%weglot.api_host%']);
 
         if ($config['cache'] &&
             ($this->stringStartWith(Kernel::VERSION, '3.') || $this->stringStartWith(Kernel::VERSION, '4.'))) {
