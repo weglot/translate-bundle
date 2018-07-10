@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()->end()
                 ->arrayNode('exclude_blocks')->prototype('scalar')->end()->end()
                 ->booleanNode('cache')->defaultFalse()->end()
+                ->scalarNode('api_host')->defaultValue('https://api.weglot.com')->end()
             ->end();
 
         return $treeBuilder;
