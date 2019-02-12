@@ -16,23 +16,23 @@ please consider submitting them as separate pull requests unless they are relate
 
 Here are a few tips to increase the likelihood of being merged:
 
-* Fill in [the required template](PULL_REQUEST_TEMPLATE.md)
-* Do not include issue numbers in the PR title
+* Fill in [the required template](PULL_REQUEST_TEMPLATE.md).
+* Do not include issue numbers in the PR title.
 * Include screenshots and animated GIFs in your pull request whenever possible.
-* Follow our [code styleguide](#styleguides).
+* Follow our [code style guides](#styleguides).
 * Document new code based on PHPDoc.
 * Write tests.
 * Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
-### Styleguides
+### Style guides
 
 Generally, we follow the style guidelines as suggested by the official language. 
 However, we ask that you conform to the styles that already exist in the library. 
 If you wish to deviate, please explain your reasoning.
 
-- [PSR1 Basic Coding Standard](https://www.php-fig.org/psr/psr-1/)
-- [PSR2 Coding Style Guide](https://www.php-fig.org/psr/psr-2/)
-- Forcing array with short syntax: `[]`
+- [PSR1 Basic Coding Standard](https://www.php-fig.org/psr/psr-1/).
+- [PSR2 Coding Style Guide](https://www.php-fig.org/psr/psr-2/).
+- Forcing array with short syntax: `[]`.
 - Replace control structure alternative syntax to use braces.
 
 Please run your code through:
@@ -52,6 +52,6 @@ If you want to make a change that will break the backward compatibility of the A
 open an issue first to discuss it with the maintainers.
 
 ## Resources
-- [Contributing to Open Source on GitHub](https://guides.github.com/activities/contributing-to-open-source/)
-- [Using Pull Requests](https://help.github.com/articles/using-pull-requests/)
-- [GitHub Help](https://help.github.com)
+- [Contributing to Open Source on GitHub](https://guides.github.com/activities/contributing-to-open-source/).
+- [Using Pull Requests](https://help.github.com/articles/using-pull-requests/).
+- [GitHub Help](https://help.github.com).
